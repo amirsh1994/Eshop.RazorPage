@@ -14,8 +14,8 @@ public static class RegisterServices
 {
     public static void RegisterApiServices(this IServiceCollection service)
     {
-        const string baseAddress = "https://localhost:5001";
-        service.AddHttpClient<IAuthService, AuthService>(op =>
+         var  baseAddress = "https://localhost:5001/api/";
+        service.AddHttpClient<IAuthService,AuthService>(op =>
         {
             op.BaseAddress = new Uri(baseAddress);
         });

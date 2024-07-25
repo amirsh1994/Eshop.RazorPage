@@ -1,15 +1,51 @@
-﻿namespace Eshop.RazorPage.Services.Auth;
+﻿using System.Net;
+using Eshop.RazorPage.Models;
+using Eshop.RazorPage.Models.Auth;
+
+namespace Eshop.RazorPage.Services.Auth;
 
 public interface IAuthService
 {
-    
+    Task<ApiResult<LoginResponse>?> Login(LoginCommand command);
+
+    Task<ApiResult?> Register(RegisterCommand command);
+
+    Task<ApiResult<LoginResponse>?> RefreshToken();
+
+    Task<ApiResult?> LogOut();
+
+
 }
 
 
-public class AuthService(HttpClient client,CancellationToken cancellationToken) : IAuthService
+public class AuthService(HttpClient client,IHttpContextAccessor accessor) : IAuthService
 {
-    public async Task RAdd()
+    public async Task<ApiResult<LoginResponse>?> Login(LoginCommand command)
     {
-        await client.SendAsync(new HttpRequestMessage(HttpMethod.Post, "as"), cancellationToken);
+      var result=  await client.PostAsJsonAsync("auth/login", command);
+      var response=await result.Content.ReadFromJsonAsync<ApiResult<LoginResponse>>();
+      return response;
+    }
+
+    public async Task<ApiResult?> Register(RegisterCommand command)
+    {
+        var result = await client.PostAsJsonAsync("auth/register", command);
+        var response = await result.Content.ReadFromJsonAsync<ApiResult>();
+        return response;
+    }
+
+    public async Task<ApiResult<LoginResponse>?> RefreshToken()
+    {
+        var refreshToken = accessor.HttpContext.Request.Cookies["refreshToken"];
+        var result = await client.PostAsync($"Auth/RefreshToken?refreshToken={refreshToken}",null);
+        var response =await result.Content.ReadFromJsonAsync<ApiResult<LoginResponse>>();
+        return response;
+    }
+
+    public async Task<ApiResult?> LogOut()
+    {
+        var result = await client.DeleteAsync("auth/logout");
+        var response = await result.Content.ReadFromJsonAsync<ApiResult>();
+        return response;
     }
 }

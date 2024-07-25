@@ -11,6 +11,13 @@ public class Program
         // Add services to the container.
         builder.Services.AddRazorPages();
         builder.Services.RegisterApiServices();
+        builder.Services.AddHttpContextAccessor();
+        builder.Services.AddHttpContextAccessor();
+        //builder.Services.AddScoped(typeof(CancellationToken), serviceProvider =>
+        //{
+        //    IHttpContextAccessor httpContext = serviceProvider.GetRequiredService<IHttpContextAccessor>();
+        //    return httpContext.HttpContext?.RequestAborted ?? CancellationToken.None;
+        //});
 
         var app = builder.Build();
 
