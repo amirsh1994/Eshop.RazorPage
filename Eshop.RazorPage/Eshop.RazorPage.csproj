@@ -8,7 +8,6 @@
 
   <ItemGroup>
     <Folder Include="Models\Auth\" />
-    <Folder Include="Models\Categories\" />
     <Folder Include="Services\Categories\" />
     <Folder Include="Services\Sellers\" />
     <Folder Include="Services\Orders\" />
