@@ -13,4 +13,8 @@
     <Folder Include="Services\Orders\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json.Bson" Version="1.0.2" />
+  </ItemGroup>
+
 </Project>
