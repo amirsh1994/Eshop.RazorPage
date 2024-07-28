@@ -25,9 +25,6 @@ public interface ISellerService
 
     Task<InventoryDto?> GetSellerInventoryById(long inventoryId);
 
-
-
-
 }
 
 
