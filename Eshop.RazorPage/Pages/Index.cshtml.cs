@@ -11,7 +11,7 @@ namespace Eshop.RazorPage.Pages;
 
         public async Task OnGet()
         {
-         var result= await authService.Login(new LoginCommand() { Password = "123456", phoneNumber = "12345678912"});
+         //var result= await authService.Login(new LoginCommand() { Password = "123456", phoneNumber = "12345678912"});
 
         }
     }
