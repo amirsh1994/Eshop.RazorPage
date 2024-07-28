@@ -6,6 +6,7 @@ using Eshop.RazorPage.Services.Orders;
 using Eshop.RazorPage.Services.Products;
 using Eshop.RazorPage.Services.Roles;
 using Eshop.RazorPage.Services.Sellers;
+using Eshop.RazorPage.Services.UserAddress;
 using Eshop.RazorPage.Services.Users;
 
 namespace Eshop.RazorPage.Infrastructure;
@@ -48,6 +49,10 @@ public static class RegisterServices
             op.BaseAddress = new Uri(baseAddress);
         });
         service.AddHttpClient<IUserService, UserService>(op =>
+        {
+            op.BaseAddress = new Uri(baseAddress);
+        });
+        service.AddHttpClient<IUserAddressService,UserAddressService>(op =>
         {
             op.BaseAddress = new Uri(baseAddress);
         });
