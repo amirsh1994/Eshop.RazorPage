@@ -6,7 +6,66 @@ public class ApiResult
 
     public MetaData MetaData { get; set; }
 
+    public bool IsReload { get; set; } = false;
+
+    public static ApiResult Error()
+    {
+        return new ApiResult
+        {
+            IsSuccess = false,
+            MetaData = new MetaData
+            {
+                Message = "عملیات نا موففق",
+                AppStatusCode = AppStatusCode.ServerError
+            }
+        };
+    }
+
+    public static ApiResult Error(string message,bool isReload=false)
+    {
+        return new ApiResult
+        {
+            IsSuccess = false,
+            MetaData = new MetaData
+            {
+                Message = message,
+                AppStatusCode = AppStatusCode.ServerError
+            },
+            IsReload = false
+        };
+    }
+
+    public static ApiResult Success(string message, bool isReload = false)
+    {
+        return new ApiResult()
+        {
+            IsSuccess = true,
+            IsReload = isReload,
+            MetaData = new MetaData()
+            {
+                AppStatusCode = AppStatusCode.Success,
+                Message = message
+            }
+        };
+    }
+
+    public static ApiResult Success()
+    {
+        return new ApiResult()
+        {
+            IsSuccess = true,
+            MetaData = new MetaData()
+            {
+                AppStatusCode = AppStatusCode.Success,
+                Message = "عملیات با موفقیت انجام شد"
+            }
+        };
+    }
+
+
+
 }
+
 
 
 public class ApiResult<TData>
@@ -16,6 +75,36 @@ public class ApiResult<TData>
     public TData Data { get; set; }
 
     public MetaData MetaData { get; set; }
+
+    public static ApiResult<TData> Success(TData data)
+    {
+        return new ApiResult<TData>
+        {
+            IsSuccess = true,
+            Data = data,
+            MetaData = new MetaData
+            {
+                Message = "عملیات با موفقیت انجام شد",
+                AppStatusCode = AppStatusCode.Success
+            }
+        };
+    }
+
+    public static ApiResult<TData> Error()
+    {
+        return new ApiResult<TData>()
+        {
+            IsSuccess = true,
+            Data = default(TData),
+            MetaData = new MetaData()
+            {
+                AppStatusCode = AppStatusCode.LogicError,
+                Message = "عملیات ناموفق"
+            }
+        };
+    }
+
+
 
 }
 

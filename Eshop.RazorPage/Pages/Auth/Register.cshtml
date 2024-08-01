@@ -9,59 +9,60 @@
     <div class="site-logo">
         <a href="/">
             <img src="/assets/images/logo.png" alt="logo">
+
         </a>
     </div>
     <div class="auth-form-title">
-     @ViewData["Title"]
+        @ViewData["Title"]
     </div>
     <form method="post">
-        @Html.EditorFor(x=>x.PhoneNumber)
+        @Html.EditorFor(x => x.PhoneNumber)
         @*<div class="form-element-row">
-            <label for="phone-number" asp-for="PhoneNumber" class="label-element">شماره موبایل</label>
-            <div class="form-element-with-icon">
-                <input type="text" asp-for="PhoneNumber" class="input-element" id="phone-number">
-                <i class="fad fa-mobile-alt"></i>
+                <label for="phone-number" asp-for="PhoneNumber" class="label-element">شماره موبایل</label>
+                <div class="form-element-with-icon">
+                    <input type="text" asp-for="PhoneNumber" class="input-element" id="phone-number">
+                    <i class="fad fa-mobile-alt"></i>
+                </div>
             </div>
-        </div>
-        <span asp-validation-for="PhoneNumber"></span>*@
-        @Html.EditorFor(x=>x.Password)
+            <span asp-validation-for="PhoneNumber"></span>*@
+        @Html.EditorFor(x => x.Password)
 
         @*<div class="form-element-row">
-            <label for="password" asp-for="Password" class="label-element">
-                <span class="d-flex justify-content-between">
-                    <span>کلمه عبور</span>
-                    <a href="#" class="link--with-border-bottom">رمز عبور خود را فراموش کرده‌ام</a>
-                </span>
-            </label>
-            <div class="form-element-with-icon">
-                <input type="password" class="input-element" asp-for="Password" id="password">
-                <i class="fad fa-key-skeleton"></i>
+                <label for="password" asp-for="Password" class="label-element">
+                    <span class="d-flex justify-content-between">
+                        <span>کلمه عبور</span>
+                        <a href="#" class="link--with-border-bottom">رمز عبور خود را فراموش کرده‌ام</a>
+                    </span>
+                </label>
+                <div class="form-element-with-icon">
+                    <input type="password" class="input-element" asp-for="Password" id="password">
+                    <i class="fad fa-key-skeleton"></i>
+                </div>
             </div>
-        </div>
-        <span asp-validation-for="Password"></span>*@
-        @Html.EditorFor(x=>x.ConfirmedPassword)
+            <span asp-validation-for="Password"></span>*@
+        @Html.EditorFor(x => x.ConfirmedPassword)
 
         @*<div class="form-element-row">
-            <label for="password" asp-for="ConfirmedPassword" class="label-element">
-                <span class="d-flex justify-content-between">
-                    <span> تکرار کلمه عبور</span>
-                    <a href="#" class="link--with-border-bottom">رمز عبور خود را فراموش کرده‌ام</a>
-                </span>
-            </label>
-            <div class="form-element-with-icon">
-                <input type="password" class="input-element" asp-for="ConfirmedPassword">
-                <i class="fad fa-key-skeleton"></i>
+                <label for="password" asp-for="ConfirmedPassword" class="label-element">
+                    <span class="d-flex justify-content-between">
+                        <span> تکرار کلمه عبور</span>
+                        <a href="#" class="link--with-border-bottom">رمز عبور خود را فراموش کرده‌ام</a>
+                    </span>
+                </label>
+                <div class="form-element-with-icon">
+                    <input type="password" class="input-element" asp-for="ConfirmedPassword">
+                    <i class="fad fa-key-skeleton"></i>
+                </div>
             </div>
-        </div>
-        <span asp-validation-for="ConfirmedPassword"></span>*@
+            <span asp-validation-for="ConfirmedPassword"></span>*@
 
         @*<div class="form-element-row">
-            <label class="container-checkbox">
-                مرا به خاطر داشته باش
-                <input type="checkbox" checked="checked">
-                <span class="checkmark"></span>
-            </label>
-        </div>*@
+                <label class="container-checkbox">
+                    مرا به خاطر داشته باش
+                    <input type="checkbox" checked="checked">
+                    <span class="checkmark"></span>
+                </label>
+            </div>*@
         <div class="form-element-row text-left">
             <button class="btn-element btn-info-element">
                 <i class="fad fa-sign-in-alt"></i>
