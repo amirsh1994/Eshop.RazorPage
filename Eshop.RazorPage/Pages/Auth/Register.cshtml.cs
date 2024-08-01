@@ -16,14 +16,26 @@ public class RegisterModel(IAuthService service) : PageModel
     [MaxLength(11, ErrorMessage = "حدقل 11 کاراکتر")]
     public string PhoneNumber { get; set; }
 
+
+
     [Display(Name = "کلمه عبور")]
     [Required(ErrorMessage = "{0} را وارد کنید")]
+    [MinLength(5,ErrorMessage = "کلمه عبور باید بیشتر از5 کاراکتر باشد")]
+    [DataType(DataType.Password)]
     public string Password { get; set; }
+
+
+
 
     [Display(Name = "تکرار کلمه عبور")]
     [Required(ErrorMessage = "{0} را وارد کنید")]
     [Compare(nameof(Password), ErrorMessage = "کلمه‌های عبور یکسان نیستند")]
+    [DataType(DataType.Password)]
     public string ConfirmedPassword { get; set; }
+
+
+
+
 
     public void OnGet()
     {
