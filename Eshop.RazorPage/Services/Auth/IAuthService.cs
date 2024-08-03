@@ -44,8 +44,16 @@ public class AuthService(HttpClient client,IHttpContextAccessor accessor) : IAut
 
     public async Task<ApiResult?> LogOut()
     {
-        var result = await client.DeleteAsync("auth/logout");
-        var response = await result.Content.ReadFromJsonAsync<ApiResult>();
-        return response;
+        try
+        {
+            var result = await client.DeleteAsync("auth/logout");
+            var response = await result.Content.ReadFromJsonAsync<ApiResult>();
+            return response;
+        }
+        catch (Exception ex)
+        {
+
+            return ApiResult.Error();
+        }
     }
 }

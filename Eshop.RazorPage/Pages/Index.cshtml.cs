@@ -1,5 +1,6 @@
 using Eshop.RazorPage.Models.Auth;
 using Eshop.RazorPage.Services.Auth;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
