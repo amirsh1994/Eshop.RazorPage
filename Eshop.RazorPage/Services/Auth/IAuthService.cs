@@ -29,7 +29,7 @@ public class AuthService(HttpClient client,IHttpContextAccessor accessor) : IAut
 
     public async Task<ApiResult?> Register(RegisterCommand command)
     {
-        var result = await client.PostAsJsonAsync("auth/register", command);
+        var result = await client.PostAsJsonAsync("uth/register", command);
         var response = await result.Content.ReadFromJsonAsync<ApiResult>();
         return response;
     }
@@ -46,7 +46,8 @@ public class AuthService(HttpClient client,IHttpContextAccessor accessor) : IAut
     {
         try
         {
-            var result = await client.DeleteAsync("auth/logout");
+            
+            var result = await client.DeleteAsync("Auth/LogOut");
             var response = await result.Content.ReadFromJsonAsync<ApiResult>();
             return response;
         }

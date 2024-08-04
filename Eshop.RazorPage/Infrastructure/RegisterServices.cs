@@ -1,4 +1,6 @@
-﻿using Eshop.RazorPage.Services.Auth;
+﻿using System.Linq;
+using System.Net;
+using Eshop.RazorPage.Services.Auth;
 using Eshop.RazorPage.Services.Banners;
 using Eshop.RazorPage.Services.Categories;
 using Eshop.RazorPage.Services.Comments;
@@ -15,46 +17,96 @@ public static class RegisterServices
 {
     public static void RegisterApiServices(this IServiceCollection service)
     {
-         var  baseAddress = "https://localhost:5001/api/";
-        service.AddHttpClient<IAuthService,AuthService>(op =>
+        service.AddHttpContextAccessor();
+        service.AddScoped<HttpClientAuthorizationDelegatingHandler>();
+
+
+        var baseAddress = "https://localhost:5001/api/";
+        service.AddHttpClient<IAuthService, AuthService>(op =>
         {
             op.BaseAddress = new Uri(baseAddress);
-        });
-        service.AddHttpClient<IBannerService,BannerService>(op =>
+        }).AddHttpMessageHandler<HttpClientAuthorizationDelegatingHandler>(); ;
+
+        service.AddHttpClient<IBannerService, BannerService>(op =>
         {
             op.BaseAddress = new Uri(baseAddress);
-        });
+        }).AddHttpMessageHandler<HttpClientAuthorizationDelegatingHandler>();
+
+
         service.AddHttpClient<ICategoryService, CategoryService>(op =>
         {
             op.BaseAddress = new Uri(baseAddress);
-        });
+        }).AddHttpMessageHandler<HttpClientAuthorizationDelegatingHandler>();
+
+
+
         service.AddHttpClient<ICommentService, CommentService>(op =>
         {
             op.BaseAddress = new Uri(baseAddress);
-        });
+        }).AddHttpMessageHandler<HttpClientAuthorizationDelegatingHandler>();
+
+
+
         service.AddHttpClient<IOrderService, OrderService>(op =>
         {
             op.BaseAddress = new Uri(baseAddress);
-        });
-        service.AddHttpClient<IProductService,ProductService>(op =>
+        }).AddHttpMessageHandler<HttpClientAuthorizationDelegatingHandler>();
+
+
+
+        service.AddHttpClient<IProductService, ProductService>(op =>
         {
             op.BaseAddress = new Uri(baseAddress);
-        });
-        service.AddHttpClient<IRoleService,RoleService>(op =>
+        }).AddHttpMessageHandler<HttpClientAuthorizationDelegatingHandler>();
+
+
+
+        service.AddHttpClient<IRoleService, RoleService>(op =>
         {
             op.BaseAddress = new Uri(baseAddress);
-        });
+        }).AddHttpMessageHandler<HttpClientAuthorizationDelegatingHandler>();
+
+
         service.AddHttpClient<ISellerService, SellerService>(op =>
         {
             op.BaseAddress = new Uri(baseAddress);
-        });
+        }).AddHttpMessageHandler<HttpClientAuthorizationDelegatingHandler>();
+
+
         service.AddHttpClient<IUserService, UserService>(op =>
         {
             op.BaseAddress = new Uri(baseAddress);
-        });
-        service.AddHttpClient<IUserAddressService,UserAddressService>(op =>
+        }).AddHttpMessageHandler<HttpClientAuthorizationDelegatingHandler>();
+
+
+
+        service.AddHttpClient<IUserAddressService, UserAddressService>(op =>
         {
             op.BaseAddress = new Uri(baseAddress);
-        });
+        }).AddHttpMessageHandler<HttpClientAuthorizationDelegatingHandler>();
+    }
+}
+
+public class HttpClientAuthorizationDelegatingHandler:DelegatingHandler
+{
+    private readonly IHttpContextAccessor _httpContextAccessor;
+
+    public HttpClientAuthorizationDelegatingHandler(IHttpContextAccessor httpContextAccessor)
+    {
+        _httpContextAccessor = httpContextAccessor;
+    }
+
+    protected override async Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
+    {
+        if (_httpContextAccessor.HttpContext != null)
+        {
+            var token = _httpContextAccessor.HttpContext.Request.Headers["Authorization"].ToString();
+
+            if (string.IsNullOrWhiteSpace(token) == false)
+            {
+                request.Headers.Add("Authorization", token);
+            }
+        }
+        return await base.SendAsync(request, cancellationToken);
     }
 }
