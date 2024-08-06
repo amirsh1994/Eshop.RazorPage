@@ -1,4 +1,6 @@
-﻿namespace Eshop.RazorPage.Models.Users.Commands;
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace Eshop.RazorPage.Models.Users.Commands;
 
 public class CreateUserCommand
 {
@@ -35,4 +37,13 @@ public class EditUserCommand
 
     public Gender Gender { get; set; }
 
+}
+
+public class ChangePasswordCommand
+{
+    public string CurrentPassword { get; set; }
+
+    public string Password { get; set; }
+
+    public string ConfirmedPassword { get; set; }
 }
