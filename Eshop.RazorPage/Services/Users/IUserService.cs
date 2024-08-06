@@ -12,7 +12,7 @@ public interface IUserService
 
     Task<ApiResult?> EditUser(EditUserCommand command);
 
-    Task<ApiResult?> EditUserCurrent(EditUserCommand command);
+    Task<ApiResult?> EditUserCurrent(EditUserCommand command);//admin
 
     Task<ApiResult?> ChangePassword(ChangePasswordCommand command);
 
@@ -52,7 +52,7 @@ public class UserService(HttpClient client) : IUserService
         formData.Add(new StringContent(command.Gender.ToString()), "Gender");
         formData.Add(new StringContent(command.UserId.ToString()), "UserId");
         formData.Add(new StreamContent(command.Avatar.OpenReadStream()), "Avatar", command.Avatar.FileName);
-        var result = await client.PostAsync(ModuleName, formData);
+        var result = await client.PutAsync(ModuleName, formData);
         return await result.Content.ReadFromJsonAsync<ApiResult>();
     }
 
@@ -62,14 +62,14 @@ public class UserService(HttpClient client) : IUserService
         formData.Add(new StringContent(command.Email), "Email");
         formData.Add(new StringContent(command.Family), "Family");
         formData.Add(new StringContent(command.Name), "Name");
-        formData.Add(new StringContent(command.Password), "Password");
+        //formData.Add(new StringContent(command.Password), "Password");
         formData.Add(new StringContent(command.PhoneNumber), "PhoneNumber");
         formData.Add(new StringContent(command.Gender.ToString()), "Gender");
         formData.Add(new StringContent(command.UserId.ToString()), "UserId");
         if (command.Avatar != null)
             formData.Add(new StreamContent(command.Avatar.OpenReadStream()), "Avatar", command.Avatar.FileName);
 
-        var result = await client.PostAsync($"{ModuleName}/current", formData);
+        var result = await client.PutAsync($"{ModuleName}/current", formData);
         return await result.Content.ReadFromJsonAsync<ApiResult>();
 
     }
@@ -112,7 +112,7 @@ public class UserService(HttpClient client) : IUserService
 
     public async Task<UserDto?> GetCurrentUser()
     {
-        var result = await client.GetFromJsonAsync<ApiResult<UserDto>>($"{ModuleName}/current");
-        return result?.Data;
+        var result = await client.GetFromJsonAsync<ApiResult<UserDto?>>($"{ModuleName}/current");
+        return result.Data;
     }
 }
