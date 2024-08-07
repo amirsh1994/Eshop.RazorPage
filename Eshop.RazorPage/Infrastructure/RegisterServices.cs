@@ -1,5 +1,6 @@
 ﻿using System.Linq;
 using System.Net;
+using Eshop.RazorPage.Infrastructure.RazorUtils;
 using Eshop.RazorPage.Services.Auth;
 using Eshop.RazorPage.Services.Banners;
 using Eshop.RazorPage.Services.Categories;
@@ -19,6 +20,12 @@ public static class RegisterServices
     {
         service.AddHttpContextAccessor();
         service.AddScoped<HttpClientAuthorizationDelegatingHandler>();
+        service.AddScoped<IRenderViewToString, RenderViewToString>();
+
+
+
+
+
 
 
         var baseAddress = "https://localhost:5001/api/";

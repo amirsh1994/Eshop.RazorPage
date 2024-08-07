@@ -12,7 +12,6 @@
     <Folder Include="Services\Categories\" />
     <Folder Include="Services\Sellers\" />
     <Folder Include="Services\Orders\" />
-    <Folder Include="ViewModels\Users\" />
   </ItemGroup>
 
   <ItemGroup>
