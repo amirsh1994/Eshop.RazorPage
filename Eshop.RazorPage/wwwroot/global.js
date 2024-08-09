@@ -1,4 +1,5 @@
-﻿function Success(title, description, isReload = false) {
+﻿
+function Success(title, description, isReload = false) {
     if (title == null || title == "undefined") {
         title = "عملیات با موفقیت انجام شد";
     }
@@ -16,6 +17,7 @@
         }
     });
 }
+
 function Info(Title, description) {
     if (Title == null || Title == "undefined") {
         Title = "توجه";
@@ -30,6 +32,7 @@ function Info(Title, description) {
         confirmButtonText: "باشه"
     });
 }
+
 function ErrorAlert(Title, description, isReload = false) {
     if (Title == null || Title == "undefined") {
         Title = "مشکلی در عملیات رخ داده است";
@@ -50,6 +53,7 @@ function ErrorAlert(Title, description, isReload = false) {
         }
     });
 }
+
 function Warning(Title, description, isReload = false) {
     if (Title == null || Title == "undefined") {
         Title = "مشکلی در عملیات رخ داده است";
@@ -103,6 +107,7 @@ function DeleteItem(url, description) {
         }
     });
 }
+
 function getCookie(cname) {
     let name = cname + "=";
     let decodedCookie = decodeURIComponent(document.cookie);
@@ -122,6 +127,7 @@ function getCookie(cname) {
 function deleteCookie(cookieName) {
     document.cookie = `${cookieName}=;expires=Thu, 01 Jan 1970;path=/`;
 }
+
 $(document).ready(function () {
     /*loadCkeditor4();*/
     var result = getCookie("SystemAlert");
@@ -139,100 +145,102 @@ $(document).ready(function () {
     }
 });
 
-//function OpenModal(url, name, title) {
-//    var modalSize = 'modal-lg';
-//    $(`#${name} .modal-body`).html('');
 
-//    $.ajax({
-//        url: url,
-//        type: "get",
-//        beforeSend: function () {
-//            $(".loading").show();
-//        },
-//        complete: function () {
-//            $(".loading").hide();
-//        },
-//    }).done(function (result) {
-//        result = JSON.parse(result);
+function OpenModal(url, name, title) {
+    var modalSize = 'modal-lg';
+    $(`#${name} .modal-body`).html('');
 
-//        if (result.Status != 1) {
-//            ErrorAlert("مشکلی رخ داده", result.Message);
-//            return;
-//        }
+    $.ajax({
+        
+        url: url,
+        type: "get",
+        beforeSend: function () {
+            $(".loading").show();
+        },
+        complete: function () {
+            $(".loading").hide();
+        },
+    }).done(function (result) {
+       
+        result = JSON.parse(result);
+        console.log(result);
 
-//        if (result.Data) {
+        if (result.Status != 1) {
+            ErrorAlert("مشکلی رخ داده", result.Message);
+            return;
+        }
 
-//            $('#' + name + ' .modal-body').html(result.Data);
-//            $('#' + name + ' .modal-title ').html(title);
+        if (result.Data) {
 
-//            $('#' + name).modal({
-//                backdrop: 'static',
-//                keyboard: true
-//            },
-//                'show');
+            window.$('#' + name + ' .modal-body').html(result.Data);
+            window.$('#' + name + ' .modal-title ').html(title);
 
-//            $('#' + name + ' .modal-dialog').removeClass('modal-lg modal-xl modal-sm modal-full');
-//            $('#' + name + ' .modal-dialog').addClass(modalSize);
+            window.$('#' + name).modal({
+                backdrop: 'static',
+                keyboard: true
+            },
+                'show');
 
-//            loadCkeditor4();
-//            const form = $("#" + name + ' form');
-//            if (form) {
-//                $.validator.unobtrusive.parse(form);
-//            }
-//        }
-//    });
+            window.$('#' + name + ' .modal-dialog').removeClass('modal-lg modal-xl modal-sm modal-full');
+            window.$('#' + name + ' .modal-dialog').addClass(modalSize);
 
-//}
+            const form = window.$("#" + name + ' form');
+            if (form) {
+                window.$.validator.unobtrusive.parse(form);
+            }
+        }
+    });
 
-//function CallBackHandler(result) {
-//    if (result.Status == 1) {
-//        Success(result.Title, result.Message, result.IsReloadPage);
-//    } else {
-//        ErrorAlert(result.Title, result.Message, result.IsReloadPage);
-//    }
+}
 
-//}
-//$(document).on("submit",
-//    'form[data-ajax="true"]',
-//    function (e) {
-//        e.preventDefault();
-//        var form = $(this);
-//        const method = form.attr("method").toLocaleLowerCase();
-//        const url = form.attr("action");
-//        if (method === "get") {
-//            const data = form.serializeArray();
-//            $.get(url,
-//                data,
-//                function (data) {
-//                    CallBackHandler(data);
-//                });
-//        } else {
-//            var formData = new FormData(this);
-//            $.ajax({
-//                url: url,
-//                type: "post",
-//                data: formData,
-//                enctype: "multipart/form-data",
-//                dataType: "json",
-//                processData: false,
-//                contentType: false,
-//                beforeSend: function () {
-//                    $(".loading").show();
-//                },
-//                complete: function () {
-//                    $(".loading").hide();
-//                },
-//                success: function (data) {
-//                    CallBackHandler(data);
-//                },
-//                error: function (data) {
-//                    ErrorAlert();
-//                }
-//            });
-//        }
-//        return false;
-//    });
+function CallBackHandler(result) {
+    if (result.Status == 1) {
+        Success(result.Title, result.Message, result.IsReloadPage);
+    } else {
+        ErrorAlert(result.Title, result.Message, result.IsReloadPage);
+    }
 
+}
+$(document).on("submit",
+    'form[data-ajax="true"]',
+    function (e) {
+        e.preventDefault();
+        var form = $(this);
+        const method = form.attr("method").toLocaleLowerCase();
+        const url = form.attr("action");
+        if (method === "get") {
+            const data = form.serializeArray();
+            $.get(url,
+                data,
+                function (data) {
+                    CallBackHandler(data);
+                });
+        } else {
+            var formData = new FormData(this);
+            $.ajax({
+                url: url,
+                type: "post",
+                data: formData,
+                enctype: "multipart/form-data",
+                dataType: "json",
+                processData: false,
+                contentType: false,
+                beforeSend: function () {
+                    $(".loading").show();
+                },
+                complete: function () {
+                    $(".loading").hide();
+                },
+                success: function (data) {
+                    CallBackHandler(data);
+                },
+                error: function (data) {
+                    ErrorAlert();
+                }
+            });
+        }
+        return false;
+    });
 
 //function loadCkeditor4() {
 //    if (!document.getElementById("ckeditor4"))

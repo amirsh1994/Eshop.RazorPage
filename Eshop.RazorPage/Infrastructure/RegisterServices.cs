@@ -21,6 +21,7 @@ public static class RegisterServices
         service.AddHttpContextAccessor();
         service.AddScoped<HttpClientAuthorizationDelegatingHandler>();
         service.AddScoped<IRenderViewToString, RenderViewToString>();
+        service.AddAutoMapper(typeof(RegisterServices).Assembly);
 
 
 
@@ -94,7 +95,7 @@ public static class RegisterServices
     }
 }
 
-public class HttpClientAuthorizationDelegatingHandler:DelegatingHandler
+public class HttpClientAuthorizationDelegatingHandler : DelegatingHandler
 {
     private readonly IHttpContextAccessor _httpContextAccessor;
 

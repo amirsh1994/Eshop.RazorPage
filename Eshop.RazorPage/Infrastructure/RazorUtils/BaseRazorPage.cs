@@ -23,14 +23,26 @@ public class BaseRazorPage : PageModel
         base.OnPageHandlerExecuting(context);
     }
 
-    protected IActionResult RedirectAndShowAlert(ApiResult result,IActionResult redirectPath)
+    protected IActionResult RedirectAndShowAlert(ApiResult result, IActionResult redirectPath)
     {
         var model = JsonConvert.SerializeObject(result);
-        HttpContext.Response.Cookies.Append("SystemAlert",model);
-        if (result.IsSuccess==false)
+        HttpContext.Response.Cookies.Append("SystemAlert", model);
+        if (result.IsSuccess == false)
         {
             return Page();
         }
+
+        return redirectPath;
+    }
+
+    protected IActionResult RedirectAndShowAlert(ApiResult result, IActionResult redirectPath, IActionResult errorRedirectTo = null)
+    {
+        var model = JsonConvert.SerializeObject(result);
+        HttpContext.Response.Cookies.Append("SystemAlert", model);
+        if (result.IsSuccess == false)
+
+            return errorRedirectTo;
+
 
         return redirectPath;
     }
@@ -47,13 +59,13 @@ public class BaseRazorPage : PageModel
     protected void SuccessAlert()
     {
         var model = JsonConvert.SerializeObject(ApiResult.Success());
-        HttpContext.Response.Cookies.Append("SystemAlert",model);
+        HttpContext.Response.Cookies.Append("SystemAlert", model);
     }
 
     protected void SuccessAlert(string message)
     {
         var model = JsonConvert.SerializeObject(ApiResult.Success(message));
-        HttpContext.Response.Cookies.Append("SystemAlert",model);
+        HttpContext.Response.Cookies.Append("SystemAlert", model);
     }
 
     protected void ErrorAlert()
@@ -64,7 +76,7 @@ public class BaseRazorPage : PageModel
 
     protected void ErrorAlert(string message)
     {
-        var model=JsonConvert.SerializeObject(ApiResult.Error(message));
+        var model = JsonConvert.SerializeObject(ApiResult.Error(message));
         HttpContext.Response.Cookies.Append("SystemAlert", model);
 
     }

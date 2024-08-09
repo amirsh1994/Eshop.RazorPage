@@ -1,19 +1,21 @@
 ﻿
-@model Eshop.RazorPage.ViewModels.Users.Addresses.CreateUserAddressViewModel
+@model Eshop.RazorPage.ViewModels.Users.Addresses.EditUserAddressViewModel
 
-<form data-ajax="true" method="post" asp-page="Index" asp-page-handler="AddAddress">
+<form data-ajax="true" method="post" asp-page="Index" asp-page-handler="EditAddress">
+    
+    @Html.HiddenFor(x=>x.Id)
     <div class="row">
         <div class="col-lg-6 mb-3">
-            @Html.EditorFor(f=>f.Shire)
+            @Html.EditorFor(f => f.Shire)
         </div>
         <div class="col-lg-6 mb-3">
-            @Html.EditorFor(f=>f.City)
+            @Html.EditorFor(f => f.City)
         </div>
         <div class="col-lg-12 mb-3">
-            @Html.EditorFor(f=>f.PostalCode)
+            @Html.EditorFor(f => f.PostalCode)
         </div>
         <div class="col-lg-12 mb-3">
-            @Html.EditorFor(f=>f.PostalAddress)
+            @Html.EditorFor(f => f.PostalAddress)
         </div>
         <div class="col-lg-6 mb-3">
             @Html.EditorFor(f => f.Name)
