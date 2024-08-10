@@ -64,5 +64,15 @@ public class IndexModel(IUserAddressService userAddressService,IRenderViewToStri
             return apiResult;
         },true );
     }
+
+    public async Task<IActionResult> OnGetSetActiveAddress(long addressId)
+    {
+        return await AjaxTryCatch(async () =>
+        {
+            var result = await userAddressService.SetActiveUserAddress(addressId);
+
+            return result;
+        },true);
+    }
 }
 

@@ -15,10 +15,12 @@ public interface IUserAddressService
 
     Task<AddressDto?> GetUserAddressById(long addressId);
 
+    Task<ApiResult?> SetActiveUserAddress(long addressId);
+
 }
 
 
-public class UserAddressService(HttpClient client):IUserAddressService
+public class UserAddressService(HttpClient client) : IUserAddressService
 {
     private const string ModuleName = "UserAddress";
     public async Task<ApiResult?> CreateUserAddress(CreateUserAddressCommand command)
@@ -49,5 +51,12 @@ public class UserAddressService(HttpClient client):IUserAddressService
     {
         var result = await client.GetFromJsonAsync<ApiResult<AddressDto?>>($"{ModuleName}/{addressId}");
         return result.Data;
+    }
+
+    public async Task<ApiResult?> SetActiveUserAddress(long addressId)
+    {
+        var result = await client.PutAsync($"{ModuleName}/SetActiveAddress/{addressId}",null);
+        var response = await result.Content.ReadFromJsonAsync<ApiResult>();
+        return response;
     }
 }
