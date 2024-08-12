@@ -10,7 +10,6 @@ using Microsoft.AspNetCore.Mvc;
 namespace Eshop.RazorPage.Pages.Profile.Addresses;
 
 [BindProperties]
-[Authorize]
 public class IndexModel(IUserAddressService userAddressService,IRenderViewToString renderViewToString,IMapper mapper) : BaseRazorPage
 {
     public List<AddressDto>? Addresses { get; set; }

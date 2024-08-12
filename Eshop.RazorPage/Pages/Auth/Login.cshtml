@@ -12,29 +12,16 @@
         </a>
     </div>
     <div class="auth-form-title">
-   @ViewData["Title"]
+        @ViewData["Title"]
     </div>
-    <form  method="post">
-        @*<div class="form-element-row">
-            <label for="phone-number" class="label-element"></label>
-            <div class="form-element-with-icon">
-                <input type="text" class="input-element" asp-for="PhoneNumber" id="phone-number">
-                <i class="fad fa-mobile-alt"></i>
-            </div>
-            <span asp-validation-for="PhoneNumber"></span>
-        </div>*@
-        @Html.EditorFor(x=>x.PhoneNumber)
+    <form method="post">
+        @Html.HiddenFor(x=>x.RedirectTo)
 
-       @Html.EditorFor(x=>x.Password)
-        
+        @Html.EditorFor(x => x.PhoneNumber)
 
-        @*<div class="form-element-row">
-            <label class="container-checkbox">
-                مرا به خاطر داشته باش
-                <input type="checkbox" checked="checked">
-                <span class="checkmark"></span>
-            </label>
-        </div>*@
+        @Html.EditorFor(x => x.Password)
+
+
         <div class="form-element-row text-left">
             <button class="btn-element btn-info-element">
                 <i class="fad fa-sign-in-alt"></i>

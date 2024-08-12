@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 namespace Eshop.RazorPage.Pages.Auth;
 [BindProperties]
 [ValidateAntiForgeryToken]
-public class LoginModel (IAuthService authService): PageModel
+public class LoginModel(IAuthService authService) : PageModel
 {
     #region Models
 
@@ -23,6 +23,9 @@ public class LoginModel (IAuthService authService): PageModel
     [DataType(DataType.Password)]
     public string Password { get; set; }
 
+
+    public string RedirectTo { get; set; }
+
     #endregion
 
 
@@ -30,13 +33,14 @@ public class LoginModel (IAuthService authService): PageModel
 
     #region Get
 
-    public IActionResult OnGet()
+    public IActionResult OnGet(string redirectTo)
     {
         if (User.Identity.IsAuthenticated)
         {
             return Redirect("/");
         }
 
+        RedirectTo = redirectTo;
         return Page();
     }
 
@@ -53,7 +57,7 @@ public class LoginModel (IAuthService authService): PageModel
         });
         if (result?.IsSuccess == false)
         {
-            ModelState.AddModelError(nameof(PhoneNumber),result.MetaData.Message);
+            ModelState.AddModelError(nameof(PhoneNumber), result.MetaData.Message);
             return Page();
         }
 
@@ -61,6 +65,11 @@ public class LoginModel (IAuthService authService): PageModel
         var refreshToken = result?.Data.RefreshToken;
         if (token != null) HttpContext.Response.Cookies.Append("token", token);
         if (refreshToken != null) HttpContext.Response.Cookies.Append("refresh-token", refreshToken);
+
+        if (string.IsNullOrWhiteSpace(RedirectTo)==false)
+        {
+            return LocalRedirect(RedirectTo);
+        }
 
         return Redirect("/");
 

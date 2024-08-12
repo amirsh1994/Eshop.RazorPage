@@ -13,7 +13,7 @@ namespace Eshop.RazorPage.Pages.Profile;
 
 
 [BindProperties]
-[Authorize]
+
 public class EditModel(IUserService userService) : BaseRazorPage
 {
     #region Model
