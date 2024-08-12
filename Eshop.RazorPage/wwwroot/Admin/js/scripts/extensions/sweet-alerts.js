@@ -216,7 +216,7 @@ $(document).ready(function () {
 		Swal.fire({
 			title: 'عالیه!',
 			text: 'مودال با تصویر سفارشی.',
-			imageUrl: '../../assets/images/slider/04.jpg',
+			imageUrl: '/admin/images/slider/04.jpg',
 			imageWidth: 400,
 			imageHeight: 200,
 			imageAlt: 'تصویر سفارشی',

@@ -18,15 +18,15 @@ $(document).ready(function () {
 					comment: 1,
 					attachment: 3,
 					users: [
-						"../../assets/images/portrait/small/avatar-s-11.jpg",
-						"../../assets/images/portrait/small/avatar-s-12.jpg"
+						"/admin/images/portrait/small/avatar-s-11.jpg",
+						"/admin/images/portrait/small/avatar-s-12.jpg"
 					]
 				},
 				{
 					id: "12",
 					title: "چیزی بنویسید",
 					border: "info",
-					image: "../../assets/images/banner/banner-21.jpg",
+					image: "/admin/images/banner/banner-21.jpg",
 					dueDate: "10 اردیبهشت"
 				},
 				{
@@ -37,8 +37,8 @@ $(document).ready(function () {
 					comment: 23,
 					attachment: 4,
 					users: [
-						"../../assets/images/portrait/small/avatar-s-1.jpg",
-						"../../assets/images/portrait/small/avatar-s-18.jpg"
+						"/admin/images/portrait/small/avatar-s-1.jpg",
+						"/admin/images/portrait/small/avatar-s-18.jpg"
 					]
 				},
 				{
@@ -48,8 +48,8 @@ $(document).ready(function () {
 					comment: 56,
 					attachment: 2,
 					users: [
-						"../../assets/images/portrait/small/avatar-s-26.jpg",
-						"../../assets/images/portrait/small/avatar-s-16.jpg"
+						"/admin/images/portrait/small/avatar-s-26.jpg",
+						"/admin/images/portrait/small/avatar-s-16.jpg"
 					]
 				},
 				{
@@ -74,8 +74,8 @@ $(document).ready(function () {
 					dueDate: "1 اردیبهشت",
 					comment: 8,
 					users: [
-						"../../assets/images/portrait/small/avatar-s-24.jpg",
-						"../../assets/images/portrait/small/avatar-s-14.jpg"
+						"/admin/images/portrait/small/avatar-s-24.jpg",
+						"/admin/images/portrait/small/avatar-s-14.jpg"
 					]
 				},
 				{
@@ -105,9 +105,9 @@ $(document).ready(function () {
 					dueDate: "1 خرداد",
 					comment: 10,
 					users: [
-						"../../assets/images/portrait/small/avatar-s-20.jpg",
-						"../../assets/images/portrait/small/avatar-s-22.jpg",
-						"../../assets/images/portrait/small/avatar-s-13.jpg"
+						"/admin/images/portrait/small/avatar-s-20.jpg",
+						"/admin/images/portrait/small/avatar-s-22.jpg",
+						"/admin/images/portrait/small/avatar-s-13.jpg"
 					]
 				},
 				{
@@ -125,8 +125,8 @@ $(document).ready(function () {
 					border: "primary",
 					dueDate: "9 خرداد",
 					users: [
-						"../../assets/images/portrait/small/avatar-s-1.jpg",
-						"../../assets/images/portrait/small/avatar-s-2.jpg"
+						"/admin/images/portrait/small/avatar-s-1.jpg",
+						"/admin/images/portrait/small/avatar-s-2.jpg"
 					]
 				}
 			]

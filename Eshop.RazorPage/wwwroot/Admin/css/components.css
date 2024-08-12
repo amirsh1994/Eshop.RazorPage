@@ -36,8 +36,8 @@
 - Daterange CSS
 -------------------------------------------------------------------*/
 
-@import url(font/primary-iran-yekan.css);
-@import url(font/secondary-iran-yekan.css);
+@import url(/admin/font/primary-iran-yekan.css);
+@import url(/admin/font/secondary-iran-yekan.css);
 
 /* Template Css */
 /* ----------- */
@@ -261,7 +261,7 @@ html body h6 {
 }
 
 html body.bg-full-screen-image {
-	background: url(../../assets/images/pages/auth-bg.jpg) no-repeat center center;
+	background: url(/admin/images/pages/auth-bg.jpg) no-repeat center center;
 	background-size: cover;
 }
 
