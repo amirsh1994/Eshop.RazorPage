@@ -30,8 +30,8 @@ public class SliderService(HttpClient client) : ISliderService
     {
         var formData = new MultipartFormDataContent();
         formData.Add(new StringContent(command.Title), "Title");
-        formData.Add(new StringContent(command.Link), "Title");
-        formData.Add(new StreamContent(command.ImageFile.OpenReadStream()), "ImageFile", command.ImageFile.FileName);
+        formData.Add(new StringContent(command.Link), "Link");
+        formData.Add(new StreamContent(command.ImageFile.OpenReadStream()), "ImageFileName", command.ImageFile.FileName);
         var result = await client.PostAsync($"{ModuleName}", formData);
         var response = await result.Content.ReadFromJsonAsync<ApiResult>();
         return response;

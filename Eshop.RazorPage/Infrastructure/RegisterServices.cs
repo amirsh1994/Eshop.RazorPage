@@ -9,6 +9,7 @@ using Eshop.RazorPage.Services.Orders;
 using Eshop.RazorPage.Services.Products;
 using Eshop.RazorPage.Services.Roles;
 using Eshop.RazorPage.Services.Sellers;
+using Eshop.RazorPage.Services.Sliders;
 using Eshop.RazorPage.Services.UserAddress;
 using Eshop.RazorPage.Services.Users;
 
@@ -39,6 +40,12 @@ public static class RegisterServices
         {
             op.BaseAddress = new Uri(baseAddress);
         }).AddHttpMessageHandler<HttpClientAuthorizationDelegatingHandler>();
+
+        service.AddHttpClient<ISliderService, SliderService>(op =>
+        {
+            op.BaseAddress = new Uri(baseAddress);
+        }).AddHttpMessageHandler<HttpClientAuthorizationDelegatingHandler>();
+
 
 
         service.AddHttpClient<ICategoryService, CategoryService>(op =>

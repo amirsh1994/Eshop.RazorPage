@@ -29,6 +29,7 @@ public class Program
             .AddRazorPagesOptions(options =>
             {
                 options.Conventions.AuthorizeFolder("/Profile", "Account");
+                options.Conventions.AuthorizeFolder("/Admin", "Account");
             });
 
         builder.Services.AddAuthentication(option =>
