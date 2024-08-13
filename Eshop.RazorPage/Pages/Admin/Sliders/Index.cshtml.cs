@@ -1,3 +1,4 @@
+using Eshop.RazorPage.Infrastructure.RazorUtils;
 using Eshop.RazorPage.Models.Sliders;
 using Eshop.RazorPage.Services.Sliders;
 using Microsoft.AspNetCore.Mvc;
@@ -5,7 +6,8 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace Eshop.RazorPage.Pages.Admin.Sliders;
 
-public class IndexModel(ISliderService sliderService) : PageModel
+
+public class IndexModel(ISliderService sliderService) : BaseRazorPage
 {
     public List<SliderDto> Sliders { get; set; }
 
@@ -14,6 +16,14 @@ public class IndexModel(ISliderService sliderService) : PageModel
         var result = await sliderService.GetSliders();
         Sliders = result;
 
+    }
+
+    public async Task<IActionResult> OnPostDeleteSlider(long sliderId)
+    {
+        return await AjaxTryCatch(() =>
+        {
+            return sliderService.DeleteSlider(sliderId);
+        });
     }
 }
 

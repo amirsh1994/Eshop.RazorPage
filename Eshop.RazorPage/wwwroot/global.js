@@ -124,10 +124,6 @@ function getCookie(cname) {
     return "";
 }
 
-function deleteCookie(cookieName) {
-    document.cookie = `${cookieName}=;expires=Thu, 01 Jan 1970;path=/`;
-}
-
 $(document).ready(function () {
     /*loadCkeditor4();*/
     var result = getCookie("SystemAlert");
