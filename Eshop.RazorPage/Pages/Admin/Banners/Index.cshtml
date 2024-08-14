@@ -1,0 +1,52 @@
+﻿@page "{handler?}"
+@using Eshop.RazorPage.Infrastructure
+@model Eshop.RazorPage.Pages.Admin.Banners.IndexModel
+@{
+    ViewData["Title"] = "مدیریت بنر ها";
+}
+
+
+<h3>@ViewData["Title"]</h3>
+
+<open-modal url="@Url.Page("Index","RenderAddPage")" modal-title="افزودن بنر ">افزودن بنر</open-modal>
+
+<div class="table-responsive card card-body p-0">
+    <table class="table table-bordered mb-0">
+        <thead>
+            <tr>
+                <th>عکس</th>
+                <th>موقعیت</th>
+                <th>Link</th>
+                <th>عملیات</th>
+           
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.Banners)
+            {
+                <tr>
+                    <td>
+                        <img src="@Directories.GetBannerImage(item.ImageName)" style="max-width: 100px" alt="Alternate Text" />
+                    </td>
+                    
+                    <td>@item.Positions.ToString().Replace("_"," ")</td> 
+                    <td>@item.Link</td>
+                    <td>
+                        <delete-item url="@Url.Page("Index","Delete",new{id=item.Id})">حذف</delete-item>
+
+                        <open-modal class="btn btn-primary btn-sm mb-2" url="@Url.Page("Index","RenderEditPage",new{id=item.Id})" modal-title="ویرایش بنر">ویرایش بنر</open-modal>
+                    </td>
+                   
+                </tr>
+            }
+            @if (Model.Banners.Any()==false)
+            {
+                <tr class="text-center">
+                    <td colspan="4">
+                        <h3 class="text-danger"> موردی برای نمایش وجود ندارد</h3>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

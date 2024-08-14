@@ -129,11 +129,11 @@ $(document).ready(function () {
     var result = getCookie("SystemAlert");
     if (result) {
         result = JSON.parse(result);
-        if (result.IsSuccess === true) {
-            Success("", result.MetaData.Message, result.isReloadPage);
-        } else {
-            ErrorAlert("", result.MetaData.Message, result.isReloadPage);
-        }
+        //if (result.IsSuccess === true) {
+        //    Success("", result.MetaData.Message, result.isReloadPage);
+        //} else {
+        //    ErrorAlert("", result.MetaData.Message, result.isReloadPage);
+        //}
         deleteCookie("SystemAlert");
     }
     if ($(".select2")) {

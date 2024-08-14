@@ -1,0 +1,20 @@
+﻿@model Eshop.RazorPage.Models.Banners.CreateBannerCommand
+
+<form method="post" enctype="multipart/form-data" asp-page="Index" asp-page-handler="CreateBanner" data-ajax="true">
+    <div class="row">
+        <div class="col-md-6">
+            @Html.EditorFor(x=>x.Link)
+        </div> 
+        
+        <div class="col-md-6">
+            @Html.EditorFor(x=>x.Positions)
+        </div> 
+        
+        <div class="col-md-12">
+            @Html.EditorFor(x=>x.ImageFile)
+        </div> 
+    </div>
+    <button type="submit" class="btn btn-primary">
+        ذخیره تغییرات <i class="fad fa-money-check-edit"></i>
+    </button>
+</form>

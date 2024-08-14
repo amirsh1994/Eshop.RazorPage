@@ -18,4 +18,9 @@ public class Directories
         return $"{SiteSettings.ServerPath}{SliderImages}/{imageName}";
     }
 
+    public static string GetBannerImage(string imageName)
+    {
+        return $"{SiteSettings.ServerPath}{BannerImages}/{imageName}";
+    }
+
 }
