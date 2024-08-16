@@ -1,0 +1,41 @@
+﻿@page
+@model Eshop.RazorPage.Pages.Admin.Roles.IndexModel
+@{
+    ViewData["title"]="مدیریت نقش ها ";
+    ViewData["select"]="roles";
+}
+
+
+<h3> @ViewData["title"] </h3>
+<a asp-page="Add" class="btn btn-success mb-2"> افزودن نقش </a>
+<div class="table-responsive card card-body p-0">
+    <table class="table table-bordered mb-0">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>عنوان</th>
+                <th>عملیات</th>
+            </tr>
+        </thead>
+        <tbody>
+           @foreach (var item in Model.Roles)
+           {
+               <tr>
+                   <td > @item.Id</td>
+                   <td > @item.Title</td>
+                   <td > <a asp-page="Edit" asp-route-id="@item.Id" class="btn btn-primary btn-sm mb-2"> ویرایش</a> </td>
+               </tr>
+           }
+           @if (Model.Roles.Any()==false)
+           {
+               <tr class="text-center">
+                   <td colspan="2">
+                       <h3 class="text-danger">
+                           ایتمی برای نمایش وجود ندارد
+                       </h3>
+                   </td>
+               </tr>
+           }
+        </tbody>
+    </table>
+</div>

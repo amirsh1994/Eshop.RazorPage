@@ -16,6 +16,7 @@
         }
     });
 }
+
 function Info(Title, description) {
     if (Title == null || Title == "undefined") {
         Title = "توجه";
@@ -30,6 +31,7 @@ function Info(Title, description) {
         confirmButtonText: "باشه"
     });
 }
+
 function ErrorAlert(Title, description, isReload = false) {
     if (Title == null || Title == "undefined") {
         Title = "مشکلی در عملیات رخ داده است";
@@ -49,6 +51,7 @@ function ErrorAlert(Title, description, isReload = false) {
         }
     });
 }
+
 function Warning(Title, description, isReload = false) {
     if (Title == null || Title == "undefined") {
         Title = "مشکلی در عملیات رخ داده است";
@@ -67,6 +70,7 @@ function Warning(Title, description, isReload = false) {
         }
     });
 }
+
 
 function DeleteItem(url, description) {
     Swal.fire({
@@ -102,6 +106,7 @@ function DeleteItem(url, description) {
         }
     });
 }
+
 function getCookie(cname) {
     let name = cname + "=";
     let decodedCookie = decodeURIComponent(document.cookie);
@@ -117,9 +122,11 @@ function getCookie(cname) {
     }
     return "";
 }
+
 function deleteCookie(cookieName) {
     document.cookie = `${cookieName}=;expires=Thu, 01 Jan 1970;path=/`;
 }
+
 $(document).ready(function () {
     var result = getCookie("SystemAlert");
     if (result) {
@@ -131,7 +138,12 @@ $(document).ready(function () {
         }
         deleteCookie("SystemAlert");
     }
+    if ($(".select2")) {
+
+        $(".select2").select2();
+    }
 });
+
 function OpenModal(url, name, title) {
     var modalSize = 'modal-lg';
     $(`#${name} .modal-body`).html('');
@@ -167,6 +179,7 @@ function OpenModal(url, name, title) {
         }
     });
 }
+
 function CallBackHandler(result) {
     if (result.Status == 1) {
         Success(result.Title, result.Message, result.IsReloadPage);
@@ -174,6 +187,7 @@ function CallBackHandler(result) {
         ErrorAlert(result.Title, result.Message, result.IsReloadPage);
     }
 }
+
 $(document).on("submit",
     'form[data-ajax="true"]',
     function (e) {

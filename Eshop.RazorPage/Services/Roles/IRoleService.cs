@@ -11,7 +11,7 @@ public interface IRoleService
 
     Task<RoleDto?> GetRoleById(long roleId);
 
-    Task<List<RoleDto>?> GetRoles();
+    Task<List<RoleDto>> GetRoles();
 
 }
 
