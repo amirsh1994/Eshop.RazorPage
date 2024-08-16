@@ -8,11 +8,9 @@ public class CategoryDto : BaseDto
 
     public SeoData SeoData { get; set; }
 
-    public List<ChildCategoryDto> Childs { get; set; }
-
+    public List<ChildCategoryDto> Children { get; set; }
 }
-
-public class ChildCategoryDto:BaseDto
+public class ChildCategoryDto : BaseDto
 {
     public string Title { get; set; }
 
@@ -23,10 +21,8 @@ public class ChildCategoryDto:BaseDto
     public long ParentId { get; set; }
 
     public List<SecondaryChildCategoryDto> Children { get; set; }
-
 }
-
-public class SecondaryChildCategoryDto:BaseDto
+public class SecondaryChildCategoryDto : BaseDto
 {
     public string Title { get; set; }
 
@@ -50,7 +46,7 @@ public class CreateCategoryCommand
 
 public class EditCategoryCommand
 {
-    public int Id { get; set; }
+    public long Id { get; set; }
 
     public string Title { get; set; }
 
@@ -61,7 +57,7 @@ public class EditCategoryCommand
 
 public class AddChildCommand
 {
-    public int ParentId { get; set; }
+    public long ParentId { get; set; }
 
     public string Title { get; set; }
 

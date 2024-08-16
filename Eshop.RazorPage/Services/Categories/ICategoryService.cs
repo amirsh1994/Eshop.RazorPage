@@ -9,13 +9,13 @@ public interface ICategoryService
 
     Task<ApiResult?> EditCategoryCommand(EditCategoryCommand command);
 
-    Task<ApiResult?> DeleteCategory(long categoryId);
+    Task<ApiResult> DeleteCategory(long categoryId);
 
     Task<ApiResult?> AddChildCategory(AddChildCommand command);
 
     Task<CategoryDto?> GetCategoryById(long categoryId);
 
-    Task<List<CategoryDto>?> GetCategories();
+    Task<List<CategoryDto>> GetCategories();
 
     Task<List<ChildCategoryDto>?> GetChildByParentId(long parentId);
 
@@ -59,9 +59,9 @@ public class CategoryService(HttpClient client) : ICategoryService
         return result?.Data;
     }
 
-    public async Task<List<CategoryDto>?> GetCategories()
+    public async Task<List<CategoryDto>> GetCategories()
     {
-        var result = await client.GetFromJsonAsync<ApiResult<List<CategoryDto>>>("category");
+        var result = await client.GetFromJsonAsync<ApiResult<List<CategoryDto>>>($"category");
         return result?.Data;
     }
 

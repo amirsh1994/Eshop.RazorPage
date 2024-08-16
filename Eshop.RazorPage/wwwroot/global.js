@@ -1,5 +1,4 @@
-﻿
-function Success(title, description, isReload = false) {
+﻿function Success(title, description, isReload = false) {
     if (title == null || title == "undefined") {
         title = "عملیات با موفقیت انجام شد";
     }
@@ -17,7 +16,6 @@ function Success(title, description, isReload = false) {
         }
     });
 }
-
 function Info(Title, description) {
     if (Title == null || Title == "undefined") {
         Title = "توجه";
@@ -32,7 +30,6 @@ function Info(Title, description) {
         confirmButtonText: "باشه"
     });
 }
-
 function ErrorAlert(Title, description, isReload = false) {
     if (Title == null || Title == "undefined") {
         Title = "مشکلی در عملیات رخ داده است";
@@ -41,7 +38,6 @@ function ErrorAlert(Title, description, isReload = false) {
         description = "";
     }
     console.log(description);
-
     Swal.fire({
         title: Title,
         html: description,
@@ -53,7 +49,6 @@ function ErrorAlert(Title, description, isReload = false) {
         }
     });
 }
-
 function Warning(Title, description, isReload = false) {
     if (Title == null || Title == "undefined") {
         Title = "مشکلی در عملیات رخ داده است";
@@ -107,7 +102,6 @@ function DeleteItem(url, description) {
         }
     });
 }
-
 function getCookie(cname) {
     let name = cname + "=";
     let decodedCookie = decodeURIComponent(document.cookie);
@@ -123,31 +117,25 @@ function getCookie(cname) {
     }
     return "";
 }
-
+function deleteCookie(cookieName) {
+    document.cookie = `${cookieName}=;expires=Thu, 01 Jan 1970;path=/`;
+}
 $(document).ready(function () {
-    /*loadCkeditor4();*/
     var result = getCookie("SystemAlert");
     if (result) {
         result = JSON.parse(result);
-        //if (result.IsSuccess === true) {
-        //    Success("", result.MetaData.Message, result.isReloadPage);
-        //} else {
-        //    ErrorAlert("", result.MetaData.Message, result.isReloadPage);
-        //}
+        if (result.IsSuccess === true) {
+            Success("", result.MetaData.Message, result.isReloadPage);
+        } else {
+            ErrorAlert("", result.MetaData.Message, result.isReloadPage);
+        }
         deleteCookie("SystemAlert");
     }
-    if ($(".select2")) {
-        $(".select2").select2();
-    }
 });
-
-
 function OpenModal(url, name, title) {
     var modalSize = 'modal-lg';
     $(`#${name} .modal-body`).html('');
-
     $.ajax({
-        
         url: url,
         type: "get",
         beforeSend: function () {
@@ -157,45 +145,34 @@ function OpenModal(url, name, title) {
             $(".loading").hide();
         },
     }).done(function (result) {
-       
         result = JSON.parse(result);
-        console.log(result);
-
         if (result.Status != 1) {
             ErrorAlert("مشکلی رخ داده", result.Message);
             return;
         }
-
         if (result.Data) {
-
-            window.$('#' + name + ' .modal-body').html(result.Data);
-            window.$('#' + name + ' .modal-title ').html(title);
-
-            window.$('#' + name).modal({
+            $('#' + name + ' .modal-body').html(result.Data);
+            $('#' + name + ' .modal-title ').html(title);
+            $('#' + name).modal({
                 backdrop: 'static',
                 keyboard: true
             },
                 'show');
-
-            window.$('#' + name + ' .modal-dialog').removeClass('modal-lg modal-xl modal-sm modal-full');
-            window.$('#' + name + ' .modal-dialog').addClass(modalSize);
-
-            const form = window.$("#" + name + ' form');
+            $('#' + name + ' .modal-dialog').removeClass('modal-lg modal-xl modal-sm modal-full');
+            $('#' + name + ' .modal-dialog').addClass(modalSize);
+            const form = $("#" + name + ' form');
             if (form) {
-                window.$.validator.unobtrusive.parse(form);
+                $.validator.unobtrusive.parse(form);
             }
         }
     });
-
 }
-
 function CallBackHandler(result) {
     if (result.Status == 1) {
         Success(result.Title, result.Message, result.IsReloadPage);
     } else {
         ErrorAlert(result.Title, result.Message, result.IsReloadPage);
     }
-
 }
 $(document).on("submit",
     'form[data-ajax="true"]',
@@ -237,15 +214,3 @@ $(document).on("submit",
         }
         return false;
     });
-
-//function loadCkeditor4() {
-//    if (!document.getElementById("ckeditor4"))
-//        return;
-
-//    $("body").prepend(`<script src="/admin/ckeditor4/ckeditor/ckeditor.js"></script>`);
-//    setTimeout(() => {
-//        CKEDITOR.replace('ckeditor4', {
-//            customConfig: '/admin/ckeditor4/ckeditor/config.js'
-//        });
-//    }, 500);
-//}
