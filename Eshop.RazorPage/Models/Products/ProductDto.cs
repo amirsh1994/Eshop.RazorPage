@@ -1,4 +1,5 @@
-﻿using Eshop.RazorPage.Models.Sellers;
+﻿using System.Collections;
+using Eshop.RazorPage.Models.Sellers;
 
 namespace Eshop.RazorPage.Models.Products;
 
@@ -74,6 +75,7 @@ public class ProductFilterData:BaseDto
     public string ImageName { get; set; }
 
     public string Slug { get; set; }
+   
 }
 
 public class ProductFilterParams:BaseFilterParam

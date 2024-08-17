@@ -18,7 +18,7 @@ public interface IProductService
 
     Task<ApiResult?> DeleteProductImage(DeleteProductImageCommand command);
 
-    Task<ProductFilterResult?> GetProductByFilter(ProductFilterParams filterParams);
+    Task<ProductFilterResult> GetProductByFilter(ProductFilterParams filterParams);
 
     Task<ProductShopResult?> GetProductForShop(ProductShopFilterParam filterParam);
 
@@ -117,7 +117,7 @@ public class ProductService(HttpClient client) : IProductService
     public async Task<ProductFilterResult?> GetProductByFilter(ProductFilterParams filterParams)
     {
         var url = $"{ModuleName}?pageId={filterParams.PageId}&take={filterParams.Take}" +
-                        $"&slug={filterParams.Slug}&title={filterParams.Title}";
+                        $"&Slug={filterParams.Slug}&Title={filterParams.Title}";
         if (filterParams.Id != null) url += $"&Id={filterParams.Id}";
         var result = await client.GetFromJsonAsync<ApiResult<ProductFilterResult>>(url);
         var response = result?.Data;

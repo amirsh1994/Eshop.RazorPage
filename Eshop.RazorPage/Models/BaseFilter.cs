@@ -25,7 +25,7 @@ public class BaseFilterParam
 
 public class BaseFilter<TData, TParam>:BaseFilter where TParam : BaseFilterParam where TData:BaseDto
 {
-    public TData Data { get; set; }
+    public List<TData> Data { get; set; }
 
     public TParam Param { get; set; }   
 }
