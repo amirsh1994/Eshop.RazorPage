@@ -1,4 +1,102 @@
 ﻿@page
+@using Eshop.RazorPage.Services.Categories
+@using Eshop.RazorPage.Models.Categories
 @model Eshop.RazorPage.Pages.Admin.Products.AddModel
+@inject ICategoryService CategoryService
 @{
+    ViewData["Title"] = "افزودن محصول";
+    ViewData["selected"] = "products";
+    var cats = await CategoryService.GetCategories();
 }
+
+@{
+    ViewData["title"] = "  افزودن محصول";
+}
+<h3> @ViewData["title"] </h3>
+
+<form class="card" method="post">
+    <div class="card-body">
+        <div class="row">
+
+            <div class="col-md-6">
+                @Html.EditorFor(x => x.Title)
+            </div>
+
+
+            <div class="col-md-6">
+
+                @Html.EditorFor(x => x.Slug)
+            </div>
+
+            <div class="col-md-12">
+
+                @Html.EditorFor(x => x.Description)
+            </div>
+
+            <div class="col-md-4">
+                <label asp-for="CategoryId"></label>
+                <select asp-for="CategoryId" class="form-control select2">
+                    @foreach (var item in cats)
+                    {
+                        <option value="@item.Id">@item.Title</option>
+                    }
+                </select>
+
+            </div>
+
+            <div class="col-md-4">
+                <label asp-for="SubCategoryId"></label>
+                <select asp-for="SubCategoryId" class="form-control select2">
+                    <option value="0">انتخاب دسته بندی</option>
+                    @{
+                        var subCategories = new List<ChildCategoryDto>();
+                        if (Model.CategoryId > 0)
+                        {
+                            subCategories = await CategoryService.GetChildByParentId(Model.CategoryId);
+                        }
+                    }
+                    @foreach (var item in subCategories)
+                    {
+                        <option value="@item.Id">@item.Title</option>
+                    }
+                </select>
+
+            </div>
+
+            <div class="col-md-4">
+                <label asp-for="FirstSubCategoryId"></label>
+                <select asp-for="FirstSubCategoryId" class="form-control select2">
+                    <option value="0">انتخاب دسته بندی</option>
+                    @{
+                        var secondarySubCategories = new List<ChildCategoryDto>();
+                        if (Model.SubCategoryId > 0)
+                        {
+                            secondarySubCategories = await CategoryService.GetChildByParentId(Model.SubCategoryId);
+                        }
+                    }
+                    @foreach (var item in secondarySubCategories)
+                    {
+                        <option value="@item.Id">@item.Title</option>
+                    }
+                </select>
+            </div>
+
+            @Html.EditorFor(x=>x.SeoData)
+            
+            <div class="col-md-6">
+
+                @Html.EditorFor(x => x.ImageFile)
+
+            </div>
+            
+
+        </div>
+    </div>
+    <div class="card-footer text-right">
+        <cancel></cancel>
+        <submit />
+    </div>
+</form>
+
+
+
