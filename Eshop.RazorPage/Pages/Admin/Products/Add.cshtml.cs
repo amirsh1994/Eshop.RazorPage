@@ -6,7 +6,6 @@ using Eshop.RazorPage.Services.Categories;
 using Eshop.RazorPage.Services.Products;
 using Eshop.RazorPage.ViewModels;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace Eshop.RazorPage.Pages.Admin.Products;
 

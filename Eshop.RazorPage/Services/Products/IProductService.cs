@@ -75,13 +75,13 @@ public class ProductService(HttpClient client) : IProductService
         if (command.FirstSubCategoryId != null)
             formData.Add(new StringContent(command.FirstSubCategoryId.ToString() ?? string.Empty), "FirstSubCategoryId");
 
-        formData.Add(new StringContent(command.SeoData.Canonical), "SeoData.Canonical");
-        formData.Add(new StringContent(command.SeoData.MetaDescription), "SeoData.MetaDescription");
-        formData.Add(new StringContent(command.SeoData.MetaKeyWords), "SeoData.MetaKeyWords");
-        formData.Add(new StringContent(command.SeoData.MetaTitle), "SeoData.MetaTitle");
-        formData.Add(new StringContent(command.SeoData.Schema), "SeoData.Schema");
-        formData.Add(new StringContent(command.SeoData.IndexPage.ToString()), "SeoData.IndexPage");
-        formData.Add(new StringContent(specification, Encoding.UTF8, "application/json"), "Specifications");
+        formData.Add(new StringContent(command.SeoData.Canonical), "SeoDataViewModel.Canonical");
+        formData.Add(new StringContent(command.SeoData.MetaDescription), "SeoDataViewModel.MetaDescription");
+        formData.Add(new StringContent(command.SeoData.MetaKeyWords), "SeoDataViewModel.MetaKeyWords");
+        formData.Add(new StringContent(command.SeoData.MetaTitle), "SeoDataViewModel.MetaTitle");
+        formData.Add(new StringContent(command.SeoData.Schema), "SeoDataViewModel.Schema");
+        formData.Add(new StringContent(command.SeoData.IndexPage.ToString()), "SeoDataViewModel.IndexPage");
+        formData.Add(new StringContent(specification, Encoding.UTF8, "application/json"), "Specification");
 
         var result = await client.PutAsync(ModuleName, formData);
         var response = await result.Content.ReadFromJsonAsync<ApiResult>();

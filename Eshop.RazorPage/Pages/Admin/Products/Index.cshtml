@@ -10,7 +10,7 @@
 
 <form method="get" class="card shadow-lg">
 
-    <div class="card-header text-left">
+    <div class="card-header text-right">
         <a asp-page="Index" class="btn btn-danger btn-sm">حذف فیلتر </a>
         <button type="submit" class="btn btn-primary btn-sm">فیلتر</button>
     </div>
@@ -35,7 +35,7 @@
     </div>
 </form>
 
-<a  class="btn btn-success" asp-page="Add">
+<a  class="btn btn-success mb-2" asp-page="Add">
     <i class="fa fa-plus"></i>
     افزودن محصول
 </a>
@@ -62,8 +62,8 @@
                     <td>@item.Slug</td>
                     <td>@item.CreationDate.ToPersianDate()</td>
                     <td>
-                        <a class="btn btn-primary btn-sm" asp-route-id="@item.Id" asp-page="Edit">ویرایش</a>
-                        <a>گالری تصاویر</a>
+                        <a class="btn btn-primary btn-sm" asp-route-productId="@item.Id" asp-page="Edit">ویرایش</a>
+                        <a href="#" class="btn btn-warning btn-sm">گالری تصاویر</a>
                     </td>
                 </tr>
             }
