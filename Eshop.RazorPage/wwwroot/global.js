@@ -71,7 +71,6 @@ function Warning(Title, description, isReload = false) {
     });
 }
 
-
 function DeleteItem(url, description) {
     Swal.fire({
         title: "آیا از حذف اطمینان دارید ؟",
@@ -128,6 +127,7 @@ function deleteCookie(cookieName) {
 }
 
 $(document).ready(function () {
+    loadCkeditor4();
     var result = getCookie("SystemAlert");
     if (result) {
         result = JSON.parse(result);
@@ -172,6 +172,7 @@ function OpenModal(url, name, title) {
                 'show');
             $('#' + name + ' .modal-dialog').removeClass('modal-lg modal-xl modal-sm modal-full');
             $('#' + name + ' .modal-dialog').addClass(modalSize);
+            loadCkeditor4();
             const form = $("#" + name + ' form');
             if (form) {
                 $.validator.unobtrusive.parse(form);
@@ -228,3 +229,15 @@ $(document).on("submit",
         }
         return false;
     });
+
+function loadCkeditor4() {
+    if (!document.getElementById("ckeditor4"))
+        return;
+
+    $("body").prepend(`<script src="/admin/ckeditor4/ckeditor/ckeditor.js"></script>`);
+    setTimeout(() => {
+        CKEDITOR.replace('ckeditor4', {
+            customConfig: '/admin/ckeditor4/ckeditor/config.js'
+        });
+    }, 500);
+}

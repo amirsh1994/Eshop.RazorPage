@@ -9,14 +9,17 @@ public class SeoDataViewModel
     [Required(ErrorMessage = "{0} را وارد کنید")]
     public string MetaTitle { get; set; }
 
-    [DataType(DataType.MultilineText)] public string? MetaDescription { get; set; } = "";
+    [DataType(DataType.MultilineText)] 
+    public string? MetaDescription { get; set; } = "";
 
     public string? MetaKeyWords { get; set; } = "";
     public bool IndexPage { get; set; }
 
-    [DataType(DataType.Url)] public string? Canonical { get; set; } = "";
+    [DataType(DataType.Url)] 
+    public string? Canonical { get; set; } = "";
 
-    [DataType(DataType.MultilineText)] public string? Schema { get; set; } = "";
+    [DataType(DataType.MultilineText)] 
+    public string? Schema { get; set; } = "";
 
     public SeoData MapToSeoData()
     {
