@@ -16,13 +16,13 @@ public interface IProductService
 
     Task<ApiResult?> AddProductImage(AddProductImageCommand command);
 
-    Task<ApiResult?> DeleteProductImage(DeleteProductImageCommand command);
+    Task<ApiResult> DeleteProductImage(DeleteProductImageCommand command);
 
     Task<ProductFilterResult> GetProductByFilter(ProductFilterParams filterParams);
 
     Task<ProductShopResult?> GetProductForShop(ProductShopFilterParam filterParam);
 
-    Task<ProductDto?> GetProductById(long productId);
+    Task<ProductDto> GetProductById(long productId);
 
     Task<ProductDto?> GetProductBySlug(string slug);
 
@@ -99,19 +99,15 @@ public class ProductService(HttpClient client) : IProductService
         return response;
     }
 
-    public async Task<ApiResult?> DeleteProductImage(DeleteProductImageCommand command)
+    public async Task<ApiResult> DeleteProductImage(DeleteProductImageCommand command)
     {
         var json = JsonConvert.SerializeObject(command);
-        var message = new HttpRequestMessage
+        var message = new HttpRequestMessage(HttpMethod.Delete, $"{ModuleName}/images")
         {
-            Content = new StringContent(json, Encoding.UTF8, "application/json"),
-            Method = HttpMethod.Delete,
-            RequestUri = new Uri($"{ModuleName}/images"),
+            Content = new StringContent(json, Encoding.UTF8, "application/json")
         };
         var result = await client.SendAsync(message);
-        var response = await result.Content.ReadFromJsonAsync<ApiResult>();
-        return response;
-
+        return await result.Content.ReadFromJsonAsync<ApiResult>();
     }
 
     public async Task<ProductFilterResult?> GetProductByFilter(ProductFilterParams filterParams)

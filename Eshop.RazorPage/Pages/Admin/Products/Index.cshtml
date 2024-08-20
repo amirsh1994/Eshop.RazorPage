@@ -63,7 +63,7 @@
                     <td>@item.CreationDate.ToPersianDate()</td>
                     <td>
                         <a class="btn btn-primary btn-sm" asp-route-productId="@item.Id" asp-page="Edit">ویرایش</a>
-                        <a href="#" class="btn btn-warning btn-sm">گالری تصاویر</a>
+                        <a asp-page="Galleries/Index" asp-route-productId="@item.Id" class="btn btn-warning btn-sm">گالری تصاویر</a>
                     </td>
                 </tr>
             }

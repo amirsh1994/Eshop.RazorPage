@@ -192,6 +192,7 @@ function CallBackHandler(result) {
 $(document).on("submit",
     'form[data-ajax="true"]',
     function (e) {
+      
         e.preventDefault();
         var form = $(this);
         const method = form.attr("method").toLocaleLowerCase();
