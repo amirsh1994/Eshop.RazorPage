@@ -63,8 +63,16 @@ public class LoginModel(IAuthService authService) : PageModel
 
         var token = result?.Data.Token;
         var refreshToken = result?.Data.RefreshToken;
-        if (token != null) HttpContext.Response.Cookies.Append("token", token);
-        if (refreshToken != null) HttpContext.Response.Cookies.Append("refresh-token", refreshToken);
+        if (token != null) HttpContext.Response.Cookies.Append("token", token,new CookieOptions()
+        {
+            HttpOnly = true,
+             Expires = DateTimeOffset.Now.AddDays(7)
+        });
+        if (refreshToken != null) HttpContext.Response.Cookies.Append("refresh-token", refreshToken,new CookieOptions()
+        {
+            HttpOnly = true
+           , Expires = DateTimeOffset.Now.AddDays(10)
+        });
 
         if (string.IsNullOrWhiteSpace(RedirectTo)==false)
         {

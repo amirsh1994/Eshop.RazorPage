@@ -5,8 +5,10 @@
 @model Eshop.RazorPage.Pages.Admin.Sliders.IndexModel
 
 @{
+    ViewData["Title"] = "مدیریت اسلایدر ها";
+    ViewData["selected"] = "sliders";
 }
-<h3>مدیریت اسلایدر ها</h3>
+<h3>@ViewData["Title"]</h3>
 <a asp-page="Add" class="btn btn-success mb-2">افزودن اسلایدر</a>
 <div class="table-responsive card card-body p-0">
     <table class="table table-bordered mb-0">
