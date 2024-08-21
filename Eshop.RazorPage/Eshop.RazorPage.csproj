@@ -9,6 +9,7 @@
   <ItemGroup>
     <Folder Include="Models\Auth\" />
     <Folder Include="Models\ShippingMethods\" />
+    <Folder Include="Pages\SellerPanel\Orders\" />
     <Folder Include="Services\Categories\" />
     <Folder Include="Services\Sellers\" />
     <Folder Include="Services\Orders\" />

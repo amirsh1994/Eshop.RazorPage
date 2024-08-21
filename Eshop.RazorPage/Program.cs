@@ -1,3 +1,4 @@
+using System.Security.Claims;
 using Eshop.RazorPage.Infrastructure;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
@@ -23,6 +24,11 @@ public class Program
             {
                 policyBuilder.RequireAuthenticatedUser();
             });
+            option.AddPolicy("SellerPanel", policyBuilder =>
+            {
+                policyBuilder.RequireAuthenticatedUser();
+                policyBuilder.RequireAssertion(context =>context.User.Claims.Any(claim=>claim.Type==ClaimTypes.Role&&claim.Value.Contains("Seller")));
+            });
         });
         builder.Services.AddRazorPages()
             .AddRazorRuntimeCompilation()
@@ -30,6 +36,7 @@ public class Program
             {
                 options.Conventions.AuthorizeFolder("/Profile", "Account");
                 options.Conventions.AuthorizeFolder("/Admin", "Account");
+                options.Conventions.AuthorizeFolder("/SellerPanel", "SellerPanel");
             });
 
         builder.Services.AddAuthentication(option =>
@@ -77,10 +84,9 @@ public class Program
             await next();
         });
 
-      
+
         app.UseHttpsRedirection();
         app.UseStaticFiles();
-
         app.UseRouting();
         app.Use(async (context, next) =>
         {
@@ -88,15 +94,15 @@ public class Program
             var status = context.Response.StatusCode;
             if (status == 401)
             {
-                var path=context.Request.Path;
+                var path = context.Request.Path;
                 context.Response.Redirect($"/Auth/login?redirectTo={path}");
             }
-               
+
         });
         app.UseAuthentication();
-      
+
         app.UseAuthorization();
-      
+
         app.MapRazorPages();
 
         app.Run();

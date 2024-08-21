@@ -30,22 +30,18 @@
                     <td>  @item.Title </td>
                     <td>@item.Link</td>
                     <td>
-                        <a asp-page="Edit" asp-route-id="@item.Id" class="btn btn-primary btn-sm mb-2" > ویرایش</a>
+                        <a asp-page="Edit" asp-route-id="@item.Id" class="btn btn-primary btn-sm mb-2"> ویرایش</a>
                         <delete-item url="@Url.Page("Index", "DeleteSlider", new {sliderId = item.Id})">
                             حذف
                         </delete-item>
-                      
+
                     </td>
                 </tr>
             }
-            @if (Model.Sliders.Any()==false)
+            @if (Model.Sliders.Any() == false)
             {
-                <tr class="text-center">
-                    <td colspan="4" >
-                       <h3  class="text-danger"> موردی برای نمایش وجود ندارد</h3>
-                    </td>
-                </tr>
-            }
-        </tbody>
-    </table>
+            <td class="text-center text-danger" colspan="4">موردی برای نمایش وجود ندارد !</td>
+        }
+            </tbody>
+        </table>
 </div>

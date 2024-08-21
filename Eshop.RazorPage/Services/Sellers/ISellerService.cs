@@ -21,7 +21,7 @@ public interface ISellerService
 
     Task<SellerDto?> GetSellerById(long sellerId);
 
-    Task<List<InventoryDto>?> GetInventories();
+    Task<List<InventoryDto>> GetInventories();
 
     Task<InventoryDto?> GetSellerInventoryById(long inventoryId);
 
@@ -30,37 +30,37 @@ public interface ISellerService
 
 public class SellerService(HttpClient client) : ISellerService
 {
-    private const string Module = "seller";
+    private const string ModuleName = "seller";
     public async Task<ApiResult?> CreateSeller(CreateSellerCommand command)
     {
-        var result = await client.PostAsJsonAsync(Module, command);
+        var result = await client.PostAsJsonAsync(ModuleName, command);
         var response = await result.Content.ReadFromJsonAsync<ApiResult>();
         return response;
     }
 
     public async Task<ApiResult?> EditSeller(EditSellerCommand command)
     {
-        var result = await client.PutAsJsonAsync(Module, command);
+        var result = await client.PutAsJsonAsync(ModuleName, command);
         var response = await result.Content.ReadFromJsonAsync<ApiResult>();
         return response;
     }
 
     public async Task<ApiResult?> EditSellerInventory(EditSellerInventoryCommand command)
     {
-        var result = await client.PutAsJsonAsync($"{Module}/Inventory", command);
+        var result = await client.PutAsJsonAsync($"{ModuleName}/Inventory", command);
         return await result.Content.ReadFromJsonAsync<ApiResult>();
     }
 
     public async Task<ApiResult?> AddSellerInventory(AddSellerInventoryCommand command)
     {
-        var result = await client.PostAsJsonAsync($"{Module}/Inventory", command);
+        var result = await client.PostAsJsonAsync($"{ModuleName}/Inventory", command);
         var response = await result.Content.ReadFromJsonAsync<ApiResult>();
         return response;
     }
 
     public async Task<SellerFilterResult?> GetSellersByFilter(SellerFilterParams filterParams)
     {
-        var url = $"{filterParams.GenerateBaseFilterUrl(Module)}" +
+        var url = $"{filterParams.GenerateBaseFilterUrl(ModuleName)}" +
                   $"&NationalCode={filterParams.NationalCode}&ShopName={filterParams.ShopName}";
         var result = await client.GetFromJsonAsync<ApiResult<SellerFilterResult>>(url);
         return result?.Data;
@@ -68,25 +68,25 @@ public class SellerService(HttpClient client) : ISellerService
 
     public async Task<SellerDto?> GetCurrent()
     {
-        var result = await client.GetFromJsonAsync<ApiResult<SellerDto>>($"{Module}/current");
+        var result = await client.GetFromJsonAsync<ApiResult<SellerDto>>($"{ModuleName}/current");
         return result?.Data;
     }
 
     public async Task<SellerDto?> GetSellerById(long sellerId)
     {
-        var result = await client.GetFromJsonAsync<ApiResult<SellerDto>>($"{Module}/{sellerId}");
+        var result = await client.GetFromJsonAsync<ApiResult<SellerDto>>($"{ModuleName}/{sellerId}");
         return result?.Data;
     }
 
-    public async Task<List<InventoryDto>?> GetInventories()
+    public async Task<List<InventoryDto>> GetInventories()
     {
-        var result = await client.GetFromJsonAsync<ApiResult<List<InventoryDto>>>($"{Module}/Inventory");
-        return result?.Data;
+        var result = await client.GetFromJsonAsync<ApiResult<List<InventoryDto>>>($"{ModuleName}/inventory");
+        return result.Data;
     }
 
     public async Task<InventoryDto?> GetSellerInventoryById(long inventoryId)
     {
-        var result = await client.GetFromJsonAsync<ApiResult<InventoryDto>>($"{Module}/Inventory/{inventoryId}");
+        var result = await client.GetFromJsonAsync<ApiResult<InventoryDto>>($"{ModuleName}/Inventory/{inventoryId}");
         return result?.Data;
     }
 }
