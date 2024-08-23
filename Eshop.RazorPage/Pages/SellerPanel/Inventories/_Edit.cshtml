@@ -1,0 +1,27 @@
+﻿@model Eshop.RazorPage.Models.Sellers.Commands.EditSellerInventoryCommand
+
+@using Eshop.RazorPage.Services.Products
+@using Eshop.RazorPage.Models.Products
+
+
+<form method="post"  asp-page="Index" data-ajax="true">
+    <div class="row">
+        @Html.HiddenFor(x => x.InventoryId)
+        @Html.HiddenFor(x => x.SellerId)
+        <div class="col-md-6">
+            @Html.EditorFor(x => x.Price)
+        </div>
+
+        <div class="col-md-6">
+            @Html.EditorFor(x => x.Count)
+        </div>
+
+        <div class="col-md-6">
+            @Html.EditorFor(x => x.DiscountPercentage)
+        </div>
+    </div>
+
+    <div class="card-footer text-left">
+        <submit />
+    </div>
+</form>

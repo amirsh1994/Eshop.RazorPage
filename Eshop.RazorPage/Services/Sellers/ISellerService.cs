@@ -11,9 +11,9 @@ public interface ISellerService
 
     Task<ApiResult?> EditSeller(EditSellerCommand command);
 
-    Task<ApiResult?> EditSellerInventory(EditSellerInventoryCommand command);
+    Task<ApiResult> EditSellerInventory(EditSellerInventoryCommand command);
 
-    Task<ApiResult?> AddSellerInventory(AddSellerInventoryCommand command);
+    Task<ApiResult> AddSellerInventory(AddSellerInventoryCommand command);
 
     Task<SellerFilterResult?> GetSellersByFilter(SellerFilterParams filterParams);
 
