@@ -3,7 +3,7 @@ using Eshop.RazorPage.Models.Sellers;
 
 namespace Eshop.RazorPage.Models.Products;
 
-public class ProductDto:BaseDto
+public class ProductDto : BaseDto
 {
     public string Title { get; set; }
 
@@ -63,27 +63,28 @@ public class ProductSpecificationDto : BaseDto
     public string Value { get; set; }
 }
 
-public class ProductFilterResult:BaseFilter<ProductFilterData, ProductFilterParams>
+public class ProductFilterResult : BaseFilter<ProductFilterData, ProductFilterParams>
 {
 
 }
 
-public class ProductFilterData:BaseDto
+public class ProductFilterData : BaseDto
 {
     public string Title { get; set; }
 
     public string ImageName { get; set; }
 
     public string Slug { get; set; }
-   
+
 }
 
-public class ProductFilterParams:BaseFilterParam
+public class ProductFilterParams : BaseFilterParam
 {
     public string? Title { get; set; }
 
     public long? Id { get; set; }
 
     public string? Slug { get; set; }
+
 
 }

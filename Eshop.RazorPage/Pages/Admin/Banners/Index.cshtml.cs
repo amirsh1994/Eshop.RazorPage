@@ -3,7 +3,6 @@ using Eshop.RazorPage.Models;
 using Eshop.RazorPage.Models.Banners;
 using Eshop.RazorPage.Services.Banners;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace Eshop.RazorPage.Pages.Admin.Banners;
 
@@ -53,7 +52,7 @@ public class IndexModel(IBannerService bannerService,IRenderViewToString renderV
 
     public async Task<IActionResult> OnPostCreateBanner(CreateBannerCommand command)
     {
-        return await AjaxTryCatch(async () => await bannerService.CreateBanner(command));
+        return await AjaxTryCatch(async () => await bannerService.CreateBanner(command),checkModelState:false);
     }
 
 

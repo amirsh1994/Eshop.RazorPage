@@ -1,19 +1,24 @@
-using Eshop.RazorPage.Models.Auth;
-using Eshop.RazorPage.Services.Auth;
-using Microsoft.AspNetCore.Authorization;
+using Eshop.RazorPage.Models;
+using Eshop.RazorPage.Services.MainPage;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.Extensions.Caching.Memory;
 
 namespace Eshop.RazorPage.Pages;
 
-    public class IndexModel(ILogger<IndexModel> logger,IAuthService authService) : PageModel
+[BindProperties]
+public class IndexModel(IMainPageService mainPageService,IMemoryCache memoryCache) : PageModel
+{
+    public MainPageDto  MainPageData { get; set; }
+
+    public async Task OnGet()
     {
-        private readonly ILogger<IndexModel> _logger = logger;
-
-        public async Task OnGet()
+        MainPageData =await memoryCache.GetOrCreateAsync("main-page",async (entry) =>
         {
-         //var result= await authService.Login(new LoginCommand() { Password = "123456", phoneNumber = "12345678912"});
-
-        }
+            entry.AbsoluteExpiration = DateTimeOffset.Now.AddMinutes(15);
+            entry.SlidingExpiration = TimeSpan.FromMinutes(5);
+            return await mainPageService.GetMainPageData();
+        }) ?? throw new InvalidOperationException();
     }
+}
 

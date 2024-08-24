@@ -2,9 +2,7 @@
 using Eshop.RazorPage.Infrastructure.RazorUtils;
 using Eshop.RazorPage.Models.Sellers.Commands;
 using Eshop.RazorPage.Services.Sellers;
-using Eshop.RazorPage.ViewModels.Sellers;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace Eshop.RazorPage.Pages.SellerPanel.Inventories;
 

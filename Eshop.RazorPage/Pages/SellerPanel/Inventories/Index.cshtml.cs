@@ -1,11 +1,9 @@
-﻿using System.ComponentModel;
-using Eshop.RazorPage.Infrastructure.RazorUtils;
+﻿using Eshop.RazorPage.Infrastructure.RazorUtils;
 using Eshop.RazorPage.Models;
 using Eshop.RazorPage.Models.Sellers;
 using Eshop.RazorPage.Models.Sellers.Commands;
 using Eshop.RazorPage.Services.Sellers;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace Eshop.RazorPage.Pages.SellerPanel.Inventories;
 

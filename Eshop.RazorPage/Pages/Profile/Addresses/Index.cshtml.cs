@@ -4,7 +4,6 @@ using Eshop.RazorPage.Models;
 using Eshop.RazorPage.Models.UserAddress;
 using Eshop.RazorPage.Services.UserAddress;
 using Eshop.RazorPage.ViewModels.Users.Addresses;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Eshop.RazorPage.Pages.Profile.Addresses;

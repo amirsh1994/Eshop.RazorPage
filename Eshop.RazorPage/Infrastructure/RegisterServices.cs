@@ -5,6 +5,7 @@ using Eshop.RazorPage.Services.Auth;
 using Eshop.RazorPage.Services.Banners;
 using Eshop.RazorPage.Services.Categories;
 using Eshop.RazorPage.Services.Comments;
+using Eshop.RazorPage.Services.MainPage;
 using Eshop.RazorPage.Services.Orders;
 using Eshop.RazorPage.Services.Products;
 using Eshop.RazorPage.Services.Roles;
@@ -22,6 +23,7 @@ public static class RegisterServices
         service.AddHttpContextAccessor();
         service.AddScoped<HttpClientAuthorizationDelegatingHandler>();
         service.AddScoped<IRenderViewToString, RenderViewToString>();
+        service.AddScoped<IMainPageService,MainPageService>();
         service.AddAutoMapper(typeof(RegisterServices).Assembly);
 
 

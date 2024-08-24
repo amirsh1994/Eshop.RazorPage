@@ -4,7 +4,6 @@ using Eshop.RazorPage.Infrastructure.Utils.CustomValidation.IFormFile;
 using Eshop.RazorPage.Models.Sliders;
 using Eshop.RazorPage.Services.Sliders;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace Eshop.RazorPage.Pages.Admin.Sliders;
 

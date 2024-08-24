@@ -20,7 +20,7 @@ public interface IProductService
 
     Task<ProductFilterResult> GetProductByFilter(ProductFilterParams filterParams);
 
-    Task<ProductShopResult?> GetProductForShop(ProductShopFilterParam filterParam);
+    Task<ProductShopResult> GetProductForShop(ProductShopFilterParam filterParam);
 
     Task<ProductDto> GetProductById(long productId);
 

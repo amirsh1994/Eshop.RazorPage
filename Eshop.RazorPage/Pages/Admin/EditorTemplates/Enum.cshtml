@@ -8,7 +8,7 @@
         <option>Select...</option>
         @foreach (var item in Enum.GetNames(type))
         {
-            <option value="@item">@item.Replace("_"," ")</option>
+            <option value="@item">@item.Replace("_", " ")</option>
         }
     </select>
     <span asp-validation-for="@Model"></span>

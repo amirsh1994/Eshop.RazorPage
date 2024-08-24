@@ -1,11 +1,9 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using Eshop.RazorPage.Infrastructure.RazorUtils;
-using Eshop.RazorPage.Models;
 using Eshop.RazorPage.Models.Categories;
 using Eshop.RazorPage.Services.Categories;
 using Eshop.RazorPage.ViewModels;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace Eshop.RazorPage.Pages.Admin.Categories;
 

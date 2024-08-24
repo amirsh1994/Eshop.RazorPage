@@ -1,7 +1,6 @@
 using Eshop.RazorPage.Infrastructure.RazorUtils;
 using Eshop.RazorPage.Services.Auth;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace Eshop.RazorPage.Pages.Auth;
 

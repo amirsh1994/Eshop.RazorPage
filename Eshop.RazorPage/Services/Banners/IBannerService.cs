@@ -37,7 +37,7 @@ public class BannerService(HttpClient client) : IBannerService
         var formData = new MultipartFormDataContent();
         formData.Add(new StringContent(command.Link), "Link");
         formData.Add(new StringContent(command.Positions.ToString()), "Positions");
-        formData.Add(new StreamContent(command.ImageFile.OpenReadStream()), "ImageFile",command.ImageFile.FileName);
+        formData.Add(new StreamContent(command.ImageFile.OpenReadStream()), "ImageFile", command.ImageFile.FileName);
         var result = await client.PostAsync("banner", formData);
         var response = await result.Content.ReadFromJsonAsync<ApiResult>();
         return response;

@@ -2,7 +2,6 @@ using Eshop.RazorPage.Infrastructure.RazorUtils;
 using Eshop.RazorPage.Models.Sliders;
 using Eshop.RazorPage.Services.Sliders;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace Eshop.RazorPage.Pages.Admin.Sliders;
 
