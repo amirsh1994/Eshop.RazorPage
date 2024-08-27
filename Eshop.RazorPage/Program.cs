@@ -16,7 +16,10 @@ public class Program
         // Add services to the container.
         builder.Services.RegisterApiServices();
         builder.Services.AddHttpContextAccessor();
-        builder.Services.AddHttpContextAccessor();
+        builder.Services.AddStackExchangeRedisCache(options =>
+        {
+            options.Configuration = "localhost:6379";
+        });
 
         builder.Services.AddAuthorization(option =>
         {
@@ -27,7 +30,7 @@ public class Program
             option.AddPolicy("SellerPanel", policyBuilder =>
             {
                 policyBuilder.RequireAuthenticatedUser();
-                policyBuilder.RequireAssertion(context =>context.User.Claims.Any(claim=>claim.Type==ClaimTypes.Role&&claim.Value.Contains("Seller")));
+                policyBuilder.RequireAssertion(context => context.User.Claims.Any(claim => claim.Type == ClaimTypes.Role && claim.Value.Contains("Seller")));
             });
         });
         builder.Services.AddRazorPages()

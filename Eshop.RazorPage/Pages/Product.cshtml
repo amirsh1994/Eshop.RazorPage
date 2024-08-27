@@ -1,6 +1,8 @@
 ﻿@page "{slug}"
+@using Eshop.RazorPage.Infrastructure
 @model Eshop.RazorPage.Pages.ProductModel
 @{
+    var productGalleries = Model.Product.ImagesDtos;
 
 }
 
@@ -10,9 +12,13 @@
         <div class="breadcrumb mb-1">
             <nav>
                 <a href="#">فروشگاه اینترنتی</a>
-                <a href="#">کالای دیجیتال</a>
-                <a href="#">گوشی موبایل</a>
-                <a>گوشی موبایل سامسونگ مدل Galaxy A30s SM-A307FN/DS دو سیم کارت ظرفیت 32 گیگابایت</a>
+                <a href="/search?category=@Model.Product.Category.Slug">@Model.Product.Category.Title</a>
+                <a href="/search?category=@Model.Product.SubCategory.Slug"> @Model.Product.SubCategory.Title</a>
+                @if (Model.Product.SecondarySubCategory != null)
+                {
+                    <a href="/search?category=@Model.Product.SecondarySubCategory.Slug"> @Model.Product.SecondarySubCategory.Title</a>
+                }
+                <a>@Model.Product.Title</a>
             </nav>
         </div>
         <!-- end breadcrumb -->
@@ -25,145 +31,70 @@
                 <div class="swiper-container gallery-slider">
                     <div class="swiper-wrapper">
                         <div class="swiper-slide">
-                            <img src="/assets/images/gallery/01.png"
-                                 data-zoom-image="/assets/images/gallery/01.png" class="zoom-image"
-                                 alt="gallery item">
+                            <img src="@Directories.GetProductImage(Model.Product.ImageName)"
+                                 data-zoom-image="@Directories.GetProductImage(Model.Product.ImageName)" class="zoom-image"
+                                 alt="@Model.Product.Title">
                         </div>
-                        <div class="swiper-slide">
-                            <img src="/assets/images/gallery/02.png"
-                                 data-zoom-image="/assets/images/gallery/02.png" class="zoom-image"
-                                 alt="gallery item">
-                        </div>
-                        <div class="swiper-slide">
-                            <img src="/assets/images/gallery/03.png"
-                                 data-zoom-image="/assets/images/gallery/03.png" class="zoom-image"
-                                 alt="gallery item">
-                        </div>
-                        <div class="swiper-slide">
-                            <img src="/assets/images/gallery/04.png"
-                                 data-zoom-image="/assets/images/gallery/04.png" class="zoom-image"
-                                 alt="gallery item">
-                        </div>
-                        <div class="swiper-slide">
-                            <img src="/assets/images/gallery/05.png"
-                                 data-zoom-image="/assets/images/gallery/05.png" class="zoom-image"
-                                 alt="gallery item">
-                        </div>
-                        <div class="swiper-slide">
-                            <img src="/assets/images/gallery/06.png"
-                                 data-zoom-image="/assets/images/gallery/06.png" class="zoom-image"
-                                 alt="gallery item">
-                        </div>
-                        <div class="swiper-slide">
-                            <img src="/assets/images/gallery/07.png"
-                                 data-zoom-image="/assets/images/gallery/07.png" class="zoom-image"
-                                 alt="gallery item">
-                        </div>
-                        <div class="swiper-slide">
-                            <img src="/assets/images/gallery/08.png"
-                                 data-zoom-image="/assets/images/gallery/08.png" class="zoom-image"
-                                 alt="gallery item">
-                        </div>
+                        @foreach (var item in productGalleries.OrderBy(x => x.Sequence))
+                        {
+                            <div class="swiper-slide">
+                                <img src="@Directories.GetProductImageGallery(item.ImageName)"
+                                     data-zoom-image="@Directories.GetProductImageGallery(item.ImageName)" class="zoom-image"
+                                     alt="@Model.Product.Title">
+                            </div>
+                        }
+
                     </div>
                 </div>
                 <div class="swiper-container gallery-slider-thumbs">
                     <div class="swiper-wrapper">
                         <div class="swiper-slide">
-                            <img src="/assets/images/gallery/01.png" alt="gallery item">
+                            <img src="@Directories.GetProductImage(Model.Product.ImageName)"
+                                 data-zoom-image="@Directories.GetProductImage(Model.Product.ImageName)"
+                                 alt="@Model.Product.Title">
                         </div>
-                        <div class="swiper-slide">
-                            <img src="/assets/images/gallery/02.png" alt="gallery item">
-                        </div>
-                        <div class="swiper-slide">
-                            <img src="/assets/images/gallery/03.png" alt="gallery item">
-                        </div>
-                        <div class="swiper-slide">
-                            <img src="/assets/images/gallery/04.png" alt="gallery item">
-                        </div>
-                        <div class="swiper-slide">
-                            <img src="/assets/images/gallery/05.png" alt="gallery item">
-                        </div>
-                        <div class="swiper-slide">
-                            <img src="/assets/images/gallery/06.png" alt="gallery item">
-                        </div>
-                        <div class="swiper-slide">
-                            <img src="/assets/images/gallery/07.png" alt="gallery item">
-                        </div>
-                        <div class="swiper-slide">
-                            <img src="/assets/images/gallery/08.png" alt="gallery item">
-                        </div>
+                        @foreach (var item in productGalleries.OrderBy(x => x.Sequence))
+                        {
+                            <div class="swiper-slide">
+                                <img src="@Directories.GetProductImageGallery(item.ImageName)"
+                                     data-zoom-image="@Directories.GetProductImageGallery(item.ImageName)"
+                                     alt="@Model.Product.Title">
+                            </div>
+                        }
+
                     </div>
                     <!-- Add Arrows -->
                     <div class="swiper-button-next"></div>
                     <div class="swiper-button-prev"></div>
                 </div>
                 <ul class="product--actions">
-                    <li>
-                        <!-- در صورت نیاز به استفاده از فرم از کد زیر استفاده کنید -->
-                        <!-- <form action="">
-                            <button class="add-to-favorite"><i class="fas fa-heart"></i></button>
-                        </form> -->
-                        <a href="#" class="is-action add-to-favorite"><i class="fas fa-heart"></i></a>
-                        <span class="tooltip--action">افزودن به علاقمندی</span>
-                    </li>
+                   
                     <li>
                         <a href="#" data-toggle="modal" data-target="#shareLinkModal">
                             <i class="fas fa-share-alt"></i>
                         </a>
                         <span class="tooltip--action">اشتراک گذاری</span>
                     </li>
-                    <li>
-                        <a href="#" class="is-action add-to-compare"><i class="fas fa-adjust"></i></a>
-                        <span class="tooltip--action">افزودن به لیست مقایسه</span>
-                    </li>
-                    <li>
-                        <a href="#" data-toggle="modal" data-target="#chartModal">
-                            <i class="fas fa-chart-area"></i>
-                        </a>
-                        <span class="tooltip--action">نمودار قیمت</span>
-                    </li>
+                   
                 </ul>
             </div>
         </div>
         <div class="col-xl-5 col-lg-4 col-md-6">
             <div class="product-title mb-3">
                 <h1>
-                    گوشی موبایل سامسونگ مدل Galaxy A30s SM-A307FN/DS دو سیم کارت ظرفیت 32 گیگابایت
+                   @Model.Product.Title
                 </h1>
-                <h1 class="product-title-en">
-                    Samsung Galaxy A30s SM-A307FN/DS Dual SIM 32GB Mobile Phone
-                </h1>
-            </div>
-            <div class="d-block mb-2">
-                <span class="font-weight-bold">برند:</span>
-                <a href="#" class="link--with-border-bottom">سامسونگ</a>
-            </div>
-            <div class="d-block mb-4">
-                <span class="font-weight-bold">گارانتی:</span>
-                <span>18 ماهه</span>
             </div>
             <div class="product-params-special">
                 <ul data-title="ویژگی‌های محصول">
-                    <li>
-                        <span>حافظه داخلی:</span>
-                        <span>32 گیگابایت</span>
-                    </li>
-                    <li>
-                        <span>مقدار RAM: </span>
-                        <span>3 گیگابایت</span>
-                    </li>
-                    <li>
-                        <span>اندازه:</span>
-                        <span>6.4 اینچ</span>
-                    </li>
-                    <li>
-                        <span>رزولوشن تصویر: </span>
-                        <span>1560 × 720 پیکسل</span>
-                    </li>
-                    <li>
-                        <span>تعداد سيم کارت:</span>
-                        <span>دو سیم کارت</span>
-                    </li>
+                  @foreach (var item in Model.Product.SpecificationsDtos.Take(4))
+                  {
+                      <li>
+                          <span> @item.Key:</span>
+                          <span>@item.Value </span>
+                      </li>
+                  }
+           
                 </ul>
             </div>
             <div class="alert alert-warning">
@@ -177,35 +108,7 @@
         </div>
         <div class="col-xl-3 col-lg-4 col-md-6">
             <div class="box-info-product">
-                <div class="product-colors mb-3">
-                    <span class="d-block mb-3">رنگ:</span>
-                    <div id="selectoptions-color" class="change-submit list-radio-color">
-                        <input type="radio" name="color" id="color-1" checked="">
-                        <label for="color-1">
-                            <div class="d-flex justify-content-between align-items-center">
-                                <span style="background-color:#9900ff !important"
-                                      class="color-span"></span>
-                                <span class="mr-2">بنفش</span>
-                            </div>
-                        </label>
-                        <input type="radio" name="color" id="color-2">
-                        <label for="color-2">
-                            <div class="d-flex justify-content-between align-items-center">
-                                <span style="background-color:#808080 !important"
-                                      class="color-span"></span>
-                                <span class="mr-2">خاکستری</span>
-                            </div>
-                        </label>
-                        <input type="radio" name="color" id="color-3">
-                        <label for="color-3">
-                            <div class="d-flex justify-content-between align-items-center">
-                                <span style="background-color:#55b72b !important"
-                                      class="color-span"></span>
-                                <span class="mr-2">سبز</span>
-                            </div>
-                        </label>
-                    </div>
-                </div>
+
                 <div class="d-block mb-3">
                     <span class="d-block">
                         تعداد:
