@@ -26,12 +26,15 @@ public interface IProductService
 
     Task<ProductDto?> GetProductBySlug(string slug);
 
+    Task<SingleProductDto?> GetSingleProduct(string slug);
+
 }
 
 
 public class ProductService(HttpClient client) : IProductService
 {
     private const string ModuleName = "product";
+
     public async Task<ApiResult?> CreateProduct(CreateProductCommand command)
     {
         var specification = JsonConvert.SerializeObject(command.Specifications);
@@ -140,6 +143,12 @@ public class ProductService(HttpClient client) : IProductService
     public async Task<ProductDto?> GetProductBySlug(string slug)
     {
         var result = await client.GetFromJsonAsync<ApiResult<ProductDto>>($"{ModuleName}/bySlug/{slug}");
+        return result?.Data;
+    }
+
+    public async Task<SingleProductDto?> GetSingleProduct(string slug)
+    {
+        var result= await client.GetFromJsonAsync<ApiResult<SingleProductDto>>($"{ModuleName}/single/{slug}");
         return result?.Data;
     }
 }

@@ -8,19 +8,18 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 namespace Eshop.RazorPage.Pages;
 
 [BindProperties]
-public class ProductModel(IProductService productService,ISellerService sellerService) : PageModel
+public class ProductModel(IProductService productService, ISellerService sellerService) : PageModel
 {
-    public ProductDto Product { get; set; }
-
-    public List<InventoryDto> Inventories { get; set; }
+    public SingleProductDto productModel { get; set; }
 
     public async Task<IActionResult> OnGet(string slug)
     {
-        var product = await productService.GetProductBySlug(slug);
+        var product = await productService.GetSingleProduct(slug);
         if (product == null)
             return NotFound();
-        Product = product;
-        Inventories = await sellerService.GetInventories();
+
+        productModel = product;
+
         return Page();
     }
 }

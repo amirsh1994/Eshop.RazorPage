@@ -1,5 +1,4 @@
 ﻿using System.Collections;
-using Eshop.RazorPage.Models.Sellers;
 
 namespace Eshop.RazorPage.Models.Products;
 
@@ -25,13 +24,6 @@ public class ProductDto : BaseDto
 
     public List<ProductSpecificationDto> SpecificationsDtos { get; set; }
 
-}
-
-public class SingleProductDto
-{
-    public ProductDto ProductDto { get; set; }
-
-    public List<InventoryDto> Inventories { get; set; }
 }
 
 public class ProductCategoryDto
