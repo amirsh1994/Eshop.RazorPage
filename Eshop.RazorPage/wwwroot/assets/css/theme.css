@@ -4501,7 +4501,7 @@ header.page-header.fixed {
 }
 
 .comments-list > .row .article {
-  max-width: 800px;
+ /* max-width: 800px;*/
   padding-bottom: 50px;
 }
 
@@ -4589,7 +4589,6 @@ header.page-header.fixed {
       -ms-flex-pack: end;
           justify-content: flex-end;
   width: 100%;
-  position: absolute;
   bottom: 0;
   right: 30px;
   margin-top: 15px;

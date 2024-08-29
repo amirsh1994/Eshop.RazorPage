@@ -6,7 +6,7 @@ public class SingleProductDto
 {
     public ProductDto Product { get; set; }
 
-    public List<InventoryDto> Inventories { get; set; }
+    public List<InventoryDto> Inventories { get; set; } = [];
 
 
 }

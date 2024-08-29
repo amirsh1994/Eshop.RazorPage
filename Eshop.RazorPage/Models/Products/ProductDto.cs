@@ -10,9 +10,9 @@ public class ProductDto : BaseDto
 
     public string Description { get; set; }
 
-    public ProductCategoryDto Category { get; set; }
+    public ProductCategoryDto?  Category { get; set; }
 
-    public ProductCategoryDto SubCategory { get; set; }
+    public ProductCategoryDto ? SubCategory { get; set; }
 
     public ProductCategoryDto? SecondarySubCategory { get; set; }//Level 3 
 
@@ -20,9 +20,9 @@ public class ProductDto : BaseDto
 
     public SeoData SeoData { get; set; }
 
-    public List<ProductImageDto> ImagesDtos { get; set; }
+    public List<ProductImageDto> ImagesDtos { get; set; } = [];
 
-    public List<ProductSpecificationDto> SpecificationsDtos { get; set; }
+    public List<ProductSpecificationDto> SpecificationsDtos { get; set; } = [];
 
 }
 

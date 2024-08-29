@@ -1,55 +1,36 @@
 ﻿namespace Eshop.RazorPage.Models.Comments;
 
-public class CommentFilterResult:BaseFilter<CommentDto,CommentsFilterParam>
+public class CommentFilterResult:BaseFilter<CommentDto, CommentFilterParam>
 {
 
 }
 
-public class CommentDto:BaseDto
+public class CommentDto : BaseDto
 {
-    public int ProductId { get; set; }
+    public long ProductID { get; set; }
 
     public string ProductTitle { get; set; }
 
     public string Text { get; set; }
 
-    public int Status { get; set; }
+    public CommentStatus Status { get; set; }
 
-    public int UserId { get; set; }
+    public long UserId { get; set; }
 
     public string UserFullName { get; set; }
-
 }
 
-public class CommentsFilterParam:BaseFilterParam
+public class CommentFilterParam : BaseFilterParam
 {
-    public int UserId { get; set; }
+    public long? UserId { get; set; }
 
-    public DateTime StartDate { get; set; }
+    public DateTime? StartDate { get; set; }
 
-    public DateTime EndDate { get; set; }
+    public DateTime? EndDate { get; set; }
 
-    public int Status { get; set; }
-
+    public CommentStatus? Status { get; set; }
 }
 
-public class CreateCommentCommand
-{
-    public string Text { get; set; }
-
-    public int UserId { get; set; }
-
-    public int ProductId { get; set; }
-}
-public class EditCommentCommand
-{
-    public long CommentId { get; set; }
-
-    public string Text { get; set; }
-
-    public int UserId { get; set; }
-
-}
 public enum CommentStatus
 {
 
