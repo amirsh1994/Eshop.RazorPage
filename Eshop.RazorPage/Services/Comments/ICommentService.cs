@@ -16,6 +16,8 @@ public interface ICommentService
 
     Task<ApiResult?> EditComment(EditCommentCommand command);
 
+    Task<ApiResult> DeleteComment(long commentId);
+
     Task<ApiResult?> ChangeStatus(long commentId, CommentStatus status);
 
 }
@@ -63,6 +65,13 @@ public class CommentService(HttpClient client) : ICommentService
         var response = await result.Content.ReadFromJsonAsync<ApiResult>();
         return response;
 
+    }
+
+    public async Task<ApiResult> DeleteComment(long commentId)
+    {
+        var result = await client.DeleteAsync($"comment/{commentId}");
+        var response=await result.Content.ReadFromJsonAsync<ApiResult>();
+        return response;
     }
 
     public async Task<ApiResult?> ChangeStatus(long commentId, CommentStatus status)

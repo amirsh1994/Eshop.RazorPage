@@ -98,6 +98,10 @@
 <script src="/assets/js/custom.js"></script>
 <script src="/global.js"></script>
 <partial name="Shared/_ValidationScriptsPartial"/>
+<div id="ajax-token">
+    @Html.AntiForgeryToken()
+</div>
+
 @RenderSectionAsync("Scripts", false)
 <script>
     $(document).ready(function() {

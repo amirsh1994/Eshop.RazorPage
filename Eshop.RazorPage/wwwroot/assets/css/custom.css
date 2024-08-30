@@ -1,4 +1,6 @@
-
+html {
+    scroll-behavior: smooth;
+}
 
 
 .field-validation-error {

@@ -4,6 +4,10 @@
 @{
     var productGalleries = Model.productModel.Product.ImagesDtos;
     var inventory = Model.productModel.Inventories.OrderBy(x => x.TotalPrice).FirstOrDefault();
+    var title = Model.productModel.Product.SeoData.MetaTitle;
+    if (string.IsNullOrWhiteSpace(title))
+        title = Model.productModel.Product.Title;
+    ViewData["title"] = title;
 
 }
 <input type="hidden"  id="productId" value="@Model.productModel.Product.Id" />
@@ -355,5 +359,16 @@
                 $("#comments").html(data);
             });
         });
+
+
+        function changeCommentPage(pageId) {
+            var productId = $("#productId").val();
+            $.ajax({
+                url: `/product/slug/ProductComment?productId=${productId}&pageId=${pageId}`,
+                type: "get"
+            }).done(function(data) {
+                $("#comments").html(data);
+            });
+        }
     </script>
 }

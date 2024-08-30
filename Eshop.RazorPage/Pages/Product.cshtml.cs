@@ -47,8 +47,14 @@ public class ProductModel(IProductService productService, ISellerService sellerS
 
     public async Task<IActionResult> OnGetProductComment(long productId,int pageId=1)
     {
-        var commentResult = await commentService.GetProductComments(1,12,productId);
+        var commentResult = await commentService.GetProductComments(pageId,2,productId);
         return Partial("Shared/Products/_Comments",commentResult);
+    }
+
+    public async Task<IActionResult> OnPostDeleteComment(long commentId)
+    {
+        return await AjaxTryCatch( async () =>await commentService.DeleteComment(commentId) );
+
     }
 }
 
