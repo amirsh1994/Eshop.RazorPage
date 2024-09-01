@@ -2,14 +2,23 @@
 @using Eshop.RazorPage.Infrastructure
 @model Eshop.RazorPage.Pages.ProductModel
 @{
-    var productGalleries = Model.productModel.Product.ImagesDtos;
+
     var inventory = Model.productModel.Inventories.OrderBy(x => x.TotalPrice).FirstOrDefault();
+
+
     var title = Model.productModel.Product.SeoData.MetaTitle;
+
+
     if (string.IsNullOrWhiteSpace(title))
+
+
         title = Model.productModel.Product.Title;
+
+
     ViewData["title"] = title;
 
 }
+
 <input type="hidden"  id="productId" value="@Model.productModel.Product.Id" />
 <div class="row mb-1">
     <div class="col-12">
@@ -41,7 +50,7 @@
                                  data-zoom-image="@Directories.GetProductImage(Model.productModel.Product.ImageName)" class="zoom-image"
                                  alt="@Model.productModel.Product.Title">
                         </div>
-                        @foreach (var item in productGalleries.OrderBy(x => x.Sequence))
+                        @foreach (var item in Model.productModel.Product.ImagesDtos.OrderBy(d => d.Sequence))
                         {
                             <div class="swiper-slide">
                                 <img src="@Directories.GetProductImageGallery(item.ImageName)"
@@ -59,7 +68,7 @@
                                  data-zoom-image="@Directories.GetProductImage(Model.productModel.Product.ImageName)"
                                  alt="@Model.productModel.Product.Title">
                         </div>
-                        @foreach (var item in productGalleries.OrderBy(x => x.Sequence))
+                        @foreach (var item in Model.productModel.Product.ImagesDtos.OrderBy(d => d.Sequence))
                         {
                             <div class="swiper-slide">
                                 <img src="@Directories.GetProductImageGallery(item.ImageName)"
@@ -133,7 +142,7 @@
                        <div class="num-block">
                            <div class="num-in">
                                <span class="plus"></span>
-                               <input type="text" class="in-num" value="1" readonly="">
+                               <input type="text" id="item_count" class="in-num" value="1" readonly="">
                                <span class="minus dis"></span>
                            </div>
                        </div>
@@ -158,7 +167,7 @@
                        </div>
                    </div>
                    <div class="d-flex align-items-center">
-                       <a href="#" class="add-to-cart">
+                       <a href="#" onclick="addToCartWithCount('@inventory.Id')" class="add-to-cart">
                            افزودن به سبد خرید
                        </a>
                    </div>
@@ -230,7 +239,7 @@
                         </p>
                         <div class="seller-item add-to-cart">
                             <b class="text-danger ">@item.TotalPrice.ToString("#,0")</b> <small>تومان</small>
-                            <a class="btn btn-danger mr-3">
+                            <a class="btn btn-danger mr-3" onclick="addToCart('@item.Id','1')">
                                 <i class="fa fa-shopping-cart"></i>
                                 افزودن به سبد خرید
                             </a>
@@ -347,6 +356,9 @@
         </div>
     </div>
 </div>
+
+
+
 @section Scripts
 {
     <script>
@@ -360,7 +372,6 @@
             });
         });
 
-
         function changeCommentPage(pageId) {
             var productId = $("#productId").val();
             $.ajax({
@@ -369,6 +380,14 @@
             }).done(function(data) {
                 $("#comments").html(data);
             });
+        }
+
+        function addToCartWithCount(id) {
+            var count = $("#item_count").val();
+            if (count <= 0) {
+                count = 1;
+            }
+            addToCart(id,count);
         }
     </script>
 }

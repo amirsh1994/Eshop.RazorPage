@@ -2,9 +2,9 @@
 
 public class DecreaseCountCommand
 {
-    public int UserId { get; set; }
+    public long UserId { get; set; }
 
-    public int ItemId { get; set; }
+    public long ItemId { get; set; }
 
     public int Count { get; set; }
 }

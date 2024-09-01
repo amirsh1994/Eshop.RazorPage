@@ -10,9 +10,9 @@ public interface IOrderService
 
     Task<ApiResult?> CheckOutOrder(CheckOutOrderCommand command);
 
-    Task<ApiResult?> IncreaseOrderItemCount(IncreaseCountCommand command);
+    Task<ApiResult> IncreaseOrderItemCount(IncreaseCountCommand command);
 
-    Task<ApiResult?> DecreaseOrderItemCount(DecreaseCountCommand command);
+    Task<ApiResult> DecreaseOrderItemCount(DecreaseCountCommand command);
 
     Task<ApiResult> DeleteOrderItem(DeleteOrderItemCommand command);
 

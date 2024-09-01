@@ -12,7 +12,7 @@ namespace Eshop.RazorPage.Pages;
 
 public class ProductModel(IProductService productService, ISellerService sellerService,ICommentService commentService) : BaseRazorPage
 {
-    public SingleProductDto productModel { get; set; }
+    public SingleProductDto  productModel { get; set; }
 
     public async Task<IActionResult> OnGet(string slug)
     {

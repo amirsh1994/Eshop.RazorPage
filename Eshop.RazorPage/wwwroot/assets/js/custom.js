@@ -33,8 +33,9 @@ function activeAddress(addressId) {
 
 function addToCart(inventoryId, count) {
     var token = $("#ajax-token input[name='__RequestVerificationToken']").val();
+
     $.ajax({
-        url: `shopcart/AddItem?inventoryId=${inventoryId}&count=${count}`,
+        url: `/shopcart/addItem?inventoryId=${inventoryId}&count=${count}`,
         type: "post",
         data: {
             __RequestVerificationToken: token
@@ -44,12 +45,10 @@ function addToCart(inventoryId, count) {
         },
         complete: function () {
             $(".loading").hide();
-        }
-
+        },
     }).done(function (data) {
         var res = JSON.parse(data);
         CallBackHandler(res);
     });
-
 }
 

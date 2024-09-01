@@ -58,5 +58,25 @@ public class ShopCartModel(IOrderService oreOrderService) : BaseRazorPage
             return Page();
         }
     }
+
+    public async Task<IActionResult> OnPostIncreaseItemCount(long id)
+    {
+        return await AjaxTryCatch(() => oreOrderService.IncreaseOrderItemCount(new IncreaseCountCommand
+        {
+            UserId = User.GetUserId(),
+            ItemId = id,
+            Count = 1
+        }));
+    }
+
+    public async Task<IActionResult> OnPostDecreaseItemCount(long id)
+    {
+        return await AjaxTryCatch(() => oreOrderService.DecreaseOrderItemCount(new DecreaseCountCommand
+        {
+            UserId = User.GetUserId(),
+            ItemId = id,
+            Count = 1
+        }));
+    }
 }
 

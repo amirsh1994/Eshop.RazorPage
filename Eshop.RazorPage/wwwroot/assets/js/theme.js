@@ -568,7 +568,7 @@
             return false;
         });
     };
-    /* end Product +/- ======*/
+    // end Product +/- ======
 
     /*====== Filter price ======*/
     HAMTA.FilterPrice = function () {
