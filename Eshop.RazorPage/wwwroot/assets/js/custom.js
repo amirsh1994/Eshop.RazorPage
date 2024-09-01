@@ -11,7 +11,7 @@ function activeAddress(addressId) {
         if (result.isConfirmed) {
             $.ajax({
                 url: "/profile/addresses/SetActiveAddress?addressId=" + addressId,
-         
+
                 beforeSend: function () {
                     $(".loading").show();
                 },
@@ -26,8 +26,30 @@ function activeAddress(addressId) {
                 } else {
                     ErrorAlert("", res.Message, res.isReloadPage);
                 }
-            })
+            });
         }
     });
+}
+
+function addToCart(inventoryId, count) {
+    var token = $("#ajax-token input[name='__RequestVerificationToken']").val();
+    $.ajax({
+        url: `shopcart/AddItem?inventoryId=${inventoryId}&count=${count}`,
+        type: "post",
+        data: {
+            __RequestVerificationToken: token
+        },
+        beforeSend: function (xhr) {
+            $(".loading").show();
+        },
+        complete: function () {
+            $(".loading").hide();
+        }
+
+    }).done(function (data) {
+        var res = JSON.parse(data);
+        CallBackHandler(res);
+    });
+
 }
 

@@ -6,7 +6,7 @@ namespace Eshop.RazorPage.Services.Orders;
 
 public interface IOrderService
 {
-    Task<ApiResult?> AddOrderItem(AddOrderItemCommand command);
+    Task<ApiResult> AddOrderItem(AddOrderItemCommand command);
 
     Task<ApiResult?> CheckOutOrder(CheckOutOrderCommand command);
 
@@ -14,7 +14,7 @@ public interface IOrderService
 
     Task<ApiResult?> DecreaseOrderItemCount(DecreaseCountCommand command);
 
-    Task<ApiResult?> DeleteOrderItem(DeleteOrderItemCommand command);
+    Task<ApiResult> DeleteOrderItem(DeleteOrderItemCommand command);
 
     Task<OrderFilterResult> GetOrdersByFilter(OrderFilterParams filterParams);
 

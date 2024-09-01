@@ -2,11 +2,11 @@
 
 public class AddOrderItemCommand
 {
-    public int InventoryId { get; set; }
+    public long InventoryId { get; set; }
 
     public int Count { get; set; }
 
-    public int UserId { get; set; }
+    public long UserId { get; set; }
 }
 
 public class DeleteOrderItemCommand

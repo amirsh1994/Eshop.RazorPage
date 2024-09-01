@@ -1,7 +1,7 @@
 ﻿@using Eshop.RazorPage.Services.Categories
-@inject ICategoryService _CategoryService
+@inject ICategoryService CategoryService
 @{
-    var cats = await _CategoryService.GetCategories();
+    var cats = await CategoryService.GetCategories();
 }
 
 
