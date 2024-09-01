@@ -22,19 +22,20 @@ public class ProductShopDto:BaseDto
 public class ProductShopResult:BaseFilter<ProductShopDto, ProductShopFilterParam>
 {
     public CategoryDto? CategoryDto { get; set; }
+
+    public ProductShopResult()
+    {
+        FilterParam = new ProductShopFilterParam();
+    }
 }
 
 
 public class ProductShopFilterParam:BaseFilterParam
 {
     public string? CategorySlug { get; set; } = "";
-
     public string? Search { get; set; } = "";
-
     public bool OnlyAvailableProducts { get; set; } = false;
-
-    public bool ? JustHasDiscount { get; set; } = false;
-
+    public bool ?JustHasDiscount { get; set; } = false;
     public ProductSearchOrderBy SearchOrderBy { get; set; } = ProductSearchOrderBy.Cheapest;
 }
 

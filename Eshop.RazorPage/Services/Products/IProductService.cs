@@ -123,15 +123,15 @@ public class ProductService(HttpClient client) : IProductService
         return response;
     }
 
-    public async Task<ProductShopResult?> GetProductForShop(ProductShopFilterParam filterParam)
+    public async Task<ProductShopResult> GetProductForShop(ProductShopFilterParam filterParam)
     {
         var url = $"{ModuleName}/shop?pageId={filterParam.PageId}&take={filterParam.Take}" +
-                  $"&CategorySlug{filterParam.CategorySlug}&OnlyAvailableProducts={filterParam.OnlyAvailableProducts}" +
-                  $"&Search={filterParam.Search}&SearchOrderBy={filterParam.SearchOrderBy}";
+                  $"&CategorySlug={filterParam.CategorySlug}&OnlyAvailableProducts={filterParam.OnlyAvailableProducts}" +
+                  $"&search={filterParam.Search}&SearchOrderBy={filterParam.SearchOrderBy}";
         if (filterParam.JustHasDiscount != null)
             url += $"&JustHasDiscount={filterParam.JustHasDiscount}";
         var result = await client.GetFromJsonAsync<ApiResult<ProductShopResult>>(url);
-        return result?.Data;
+        return result.Data;
     }
 
     public async Task<ProductDto?> GetProductById(long productId)
