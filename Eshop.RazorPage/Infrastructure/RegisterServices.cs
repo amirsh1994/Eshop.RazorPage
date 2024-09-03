@@ -1,5 +1,4 @@
-﻿using System.Linq;
-using System.Net;
+﻿using Eshop.RazorPage.Infrastructure.CookieUtil;
 using Eshop.RazorPage.Infrastructure.RazorUtils;
 using Eshop.RazorPage.Services.Auth;
 using Eshop.RazorPage.Services.Banners;
@@ -25,6 +24,8 @@ public static class RegisterServices
         service.AddScoped<IRenderViewToString, RenderViewToString>();
         service.AddScoped<IMainPageService,MainPageService>();
         service.AddAutoMapper(typeof(RegisterServices).Assembly);
+        service.AddCookieManager();
+        service.AddScoped<ShopCartCookieManager>();
 
 
 
