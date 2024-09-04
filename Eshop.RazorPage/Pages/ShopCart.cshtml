@@ -34,7 +34,7 @@ else
                         {
                             <div class="cart-item py-4 px-3">
                                 <div class="item-thumbnail">
-                                    <a href="#">
+                                    <a href="/product/@item.ProductSlug">
                                         <img src="@Directories.GetProductImage(item.ProductImageName)" alt="@item.ProductTitle">
                                     </a>
                                 </div>
@@ -99,7 +99,14 @@ else
                 </div>
                 <hr>
                 <div class="d-flex px-3 py-4">
-                    <a href="/checkout" class="btn btn-danger btn-block py-2">ادامه فرایند خرید</a>
+                  @if (User.Identity is{IsAuthenticated:true})
+                  {
+                      <a asp-page="Checkout" class="btn btn-danger btn-block py-2">ادامه فرایند خرید</a>
+                  }
+                  else
+                  {
+                      <a asp-page="/auth/login" class="btn btn-danger btn-block py-2">ادامه فرایند خرید</a>
+                  }
                 </div>
             </div>
         </div>

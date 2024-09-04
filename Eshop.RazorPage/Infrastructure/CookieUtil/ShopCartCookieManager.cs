@@ -157,6 +157,16 @@ public class ShopCartCookieManager(ICookieManager cookieManager, ISellerService 
     #endregion
 
 
+    #region DeleteShopCart
+
+    public void DeleteShopCart()
+    {
+        cookieManager.Remove(CookieShopCart);
+    }
+
+    #endregion
+
+
     #region HelperMethodes
 
     private long GenerateId()

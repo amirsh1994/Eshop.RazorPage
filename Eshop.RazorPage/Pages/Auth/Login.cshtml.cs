@@ -1,13 +1,19 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
+using Eshop.RazorPage.Infrastructure;
+using Eshop.RazorPage.Infrastructure.CookieUtil;
 using Eshop.RazorPage.Models.Auth;
+using Eshop.RazorPage.Models.Orders.Commands;
 using Eshop.RazorPage.Services.Auth;
+using Eshop.RazorPage.Services.Orders;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace Eshop.RazorPage.Pages.Auth;
 [BindProperties]
 [ValidateAntiForgeryToken]
-public class LoginModel(IAuthService authService) : PageModel
+public class LoginModel(IAuthService authService, ShopCartCookieManager cookieManager, IOrderService orderService) : PageModel
 {
     #region Models
 
@@ -63,18 +69,20 @@ public class LoginModel(IAuthService authService) : PageModel
 
         var token = result?.Data.Token;
         var refreshToken = result?.Data.RefreshToken;
-        if (token != null) HttpContext.Response.Cookies.Append("token", token,new CookieOptions()
+        if (token != null) HttpContext.Response.Cookies.Append("token", token, new CookieOptions()
         {
             HttpOnly = true,
-             Expires = DateTimeOffset.Now.AddDays(7)
+            Expires = DateTimeOffset.Now.AddDays(7)
         });
-        if (refreshToken != null) HttpContext.Response.Cookies.Append("refresh-token", refreshToken,new CookieOptions()
+        if (refreshToken != null) HttpContext.Response.Cookies.Append("refresh-token", refreshToken, new CookieOptions()
         {
             HttpOnly = true
-           , Expires = DateTimeOffset.Now.AddDays(10)
+           ,
+            Expires = DateTimeOffset.Now.AddDays(10)
         });
-
-        if (string.IsNullOrWhiteSpace(RedirectTo)==false)
+       
+        await SyncShopCart(token);
+        if (string.IsNullOrWhiteSpace(RedirectTo) == false)
         {
             return LocalRedirect(RedirectTo);
         }
@@ -83,6 +91,27 @@ public class LoginModel(IAuthService authService) : PageModel
 
     }
 
+    private async Task SyncShopCart(string token)
+    {
+        var shopCart = cookieManager.Get();
+        if (shopCart == null || shopCart.Items.Any() == false)
+            return;
+        HttpContext.Request.Headers.Append("Authorization", $"Bearer {token}");//چون دفعه اول داریم میریم سمت سرور توکن نداریم که بریم ایتم های اردر به سمت سرور هم اد بشن
+        var handler = new JwtSecurityTokenHandler();
+        var jwtSecurityToken = handler.ReadJwtToken(token);
+        var userId = Convert.ToInt64(jwtSecurityToken.Claims.First(claim=>claim.Type==ClaimTypes.NameIdentifier).Value);
+
+        foreach (var item in shopCart.Items)
+        {
+            await orderService.AddOrderItem(new AddOrderItemCommand
+            {
+                InventoryId = item.InventoryId,
+                Count = item.Count,
+                UserId = userId
+            });
+        }
+        cookieManager.DeleteShopCart();
+    }
     #endregion
 
 

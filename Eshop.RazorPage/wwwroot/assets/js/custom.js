@@ -52,3 +52,54 @@ function addToCart(inventoryId, count) {
     });
 }
 
+$(document).ready(function() {
+    $.ajax({
+        url: "/shopcart/ShopCartDetail",
+        type:"get"
+    }).done(function(data) {
+        var bagElementsNumber = $(".bag-items-number");
+        bagElementsNumber[0].innerHTML = data.count;
+        bagElementsNumber[1].innerHTML = data.count;
+        console.log(bagElementsNumber);
+        $(".cart-footer .total").html(data.price);
+        if (data.items.length === 0) {
+            $(".cart-items .do-nice-scroll").append(`  <li class="cart-items alert alert-warning text-center">سبد خرید شما خالی است</li>`);
+
+        } else {
+            data.items.map((i) => {
+                $(".cart-items .do-nice-scroll").append(`
+                                  <li class="cart-items">
+                                    <ul class="do-nice-scroll">
+                                        <li class="cart-item">
+                                            <span class="d-flex align-items-center mb-2">
+                                                <a href="/product/${i.productSlug}">
+                                                    <img src="https://localhost:5001//images/Products/${i.productImageName}" alt="">
+                                                </a>
+                                                <span>
+                                                    <a href="#">
+                                                        <span class="title-item">
+                                                           ${i.productTitle}
+                                                        </span>
+                                                    </a>
+                                                    <span class="color d-flex align-items-center">
+                                                        تعداد:
+                                                        <label style="display:contents" >${i.count}</label>
+                                                    </span>
+                                                </span>
+                                            </span>
+                                            <span class="price">${splitNumber(i.totalPrice)} تومان</span>
+                                            <button class="remove-item" onclick="DeleteItem('/ShopCart/DeleteItem?id=${i.id}')">
+                                                <i class="far fa-trash-alt"></i>
+                                            </button>
+                                   </li>
+           `);
+            });
+        }
+      
+
+    });
+});
+function splitNumber(value) {
+    return value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+}
+
