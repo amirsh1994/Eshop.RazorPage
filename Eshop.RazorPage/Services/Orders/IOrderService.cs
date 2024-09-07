@@ -18,16 +18,9 @@ public interface IOrderService
 
     Task<OrderFilterResult> GetOrdersByFilter(OrderFilterParams filterParams);
 
-    Task<OrderDto?> GetOrderById(long orderId);
+    Task<OrderDto> GetOrderById(long orderId);
 
-    Task<OrderDto?> GetCurrentOrder();
-
-
-
-
-
-
-
+    Task<OrderDto> GetCurrentOrder();
 }
 
 public class OrderService(HttpClient client) : IOrderService

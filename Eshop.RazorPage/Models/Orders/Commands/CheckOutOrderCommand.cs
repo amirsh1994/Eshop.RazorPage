@@ -2,7 +2,7 @@
 
 public class CheckOutOrderCommand
 {
-    public int UserId { get; set; }
+    public long UserId { get; set; }
 
     public string Shire { get; set; }
 
@@ -19,4 +19,6 @@ public class CheckOutOrderCommand
     public string Name { get; set; }
 
     public string NationalCode { get; set; }
+
+    public long ShippingMethodeId { get;  set; }
 }

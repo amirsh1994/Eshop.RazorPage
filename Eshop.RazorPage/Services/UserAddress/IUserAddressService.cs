@@ -11,7 +11,7 @@ public interface IUserAddressService
 
     Task<ApiResult?> DeleteUserAddress(long userAddressId);
 
-    Task<List<AddressDto>?> GetUserAddresses();
+    Task<List<AddressDto>> GetUserAddresses();
 
     Task<AddressDto?> GetUserAddressById(long addressId);
 

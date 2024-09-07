@@ -11,6 +11,7 @@
     <Folder Include="Models\ShippingMethods\" />
     <Folder Include="Pages\SellerPanel\Orders\" />
     <Folder Include="Services\Categories\" />
+    <Folder Include="Services\Transactions\" />
     <Folder Include="Services\Sellers\" />
     <Folder Include="Services\Orders\" />
   </ItemGroup>

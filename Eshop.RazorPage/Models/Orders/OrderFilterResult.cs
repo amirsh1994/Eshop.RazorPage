@@ -14,9 +14,27 @@ public class OrderDto : BaseDto
 
     public OrderDiscount? Discount { get; set; }
 
-    public OrderShippingMethod Methode { get; set; }
+    public OrderShippingMethod?  Methode { get; set; }
 
     public OrderAddress? Address { get; set; }
+
+    public int TotalPrice
+    {
+        get
+        {
+            var totalPrice = Items.Sum(x => x.TotalPrice);
+            if (Methode!=null)
+            {
+                totalPrice+=  Methode.ShippingCost;
+            }
+
+            if (Discount!=null)
+            {
+                totalPrice -= Discount.DiscountAmount;
+            }
+            return totalPrice;
+        }
+    }
 }
 
 public class OrderItemDto : BaseDto

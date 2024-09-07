@@ -9,7 +9,9 @@ using Eshop.RazorPage.Services.Orders;
 using Eshop.RazorPage.Services.Products;
 using Eshop.RazorPage.Services.Roles;
 using Eshop.RazorPage.Services.Sellers;
+using Eshop.RazorPage.Services.ShippingMethods;
 using Eshop.RazorPage.Services.Sliders;
+using Eshop.RazorPage.Services.Transactions;
 using Eshop.RazorPage.Services.UserAddress;
 using Eshop.RazorPage.Services.Users;
 
@@ -99,6 +101,16 @@ public static class RegisterServices
 
 
         service.AddHttpClient<IUserAddressService, UserAddressService>(op =>
+        {
+            op.BaseAddress = new Uri(baseAddress);
+        }).AddHttpMessageHandler<HttpClientAuthorizationDelegatingHandler>();
+
+        service.AddHttpClient<IShippingMethodeService, ShippingMethodeService>(op =>
+        {
+            op.BaseAddress = new Uri(baseAddress);
+        }).AddHttpMessageHandler<HttpClientAuthorizationDelegatingHandler>();
+
+        service.AddHttpClient<ITransactionService, TransactionService>(op =>
         {
             op.BaseAddress = new Uri(baseAddress);
         }).AddHttpMessageHandler<HttpClientAuthorizationDelegatingHandler>();
