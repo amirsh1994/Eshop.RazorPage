@@ -20,7 +20,7 @@ public interface IOrderService
 
     Task<OrderFilterResult> GetUserOrdersByFilter(int take,int pageId,OrderStatus ? orderStatus);
 
-    Task<OrderDto> GetOrderById(long orderId);
+    Task<OrderDto?> GetOrderById(long orderId);
 
     Task<OrderDto> GetCurrentOrder();
 }
