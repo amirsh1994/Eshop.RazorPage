@@ -18,6 +18,8 @@ public interface IOrderService
 
     Task<OrderFilterResult> GetOrdersByFilter(OrderFilterParams filterParams);
 
+    Task<OrderFilterResult> GetUserOrdersByFilter(int take,int pageId,OrderStatus ? orderStatus);
+
     Task<OrderDto> GetOrderById(long orderId);
 
     Task<OrderDto> GetCurrentOrder();
@@ -66,6 +68,18 @@ public class OrderService(HttpClient client) : IOrderService
 
         var response = await client.GetFromJsonAsync<ApiResult<OrderFilterResult>>($"order/");
         return response.Data;
+    }
+
+    public async Task<OrderFilterResult> GetUserOrdersByFilter(int take, int pageId, OrderStatus? orderStatus)
+    {
+        var url = $"order/current/filter?pageId={pageId}&take={take}";
+        if (orderStatus!=null)
+        {
+            url += $"&status={orderStatus}";
+        }
+
+        var result = await client.GetFromJsonAsync<ApiResult<OrderFilterResult>>(url);
+        return result!.Data;
     }
 
     public async Task<OrderDto?> GetOrderById(long orderId)
