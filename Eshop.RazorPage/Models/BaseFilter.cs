@@ -23,8 +23,13 @@ public class BaseFilterParam
 
 }
 
-public class BaseFilter<TData, TParam> : BaseFilter where TParam : BaseFilterParam where TData : BaseDto
+public class BaseFilter<TData, TParam>:BaseFilter 
+
+    where TParam : BaseFilterParam 
+    where TData : BaseDto
+
 {
     public List<TData> Data { get; set; }
+
     public TParam FilterParam { get; set; }
 }
