@@ -6,8 +6,8 @@
 
 
 @{
-    ViewData["title"] = "مدیریت محصولات";
-    ViewData["selected"] = "products_product";
+    ViewData["title"] = "مدیریت سفارشات";
+    ViewData["selected"] = "orders";
 }
 
 
@@ -54,35 +54,36 @@
     <div class="card-body table-responsive p-0">
         <table class="table table-bordered table-hover text-center m-0">
             <thead>
-                <tr>
-                    <th>#</th>
-                    <th>استان - شهر</th>
-                    <th>تعداد محصولات</th>
-                    <th>وضعیت</th>
-                    <th>مبلغ</th>
-                    <th>تاریخ</th>
-                    <th>عملیات</th>
-                </tr>
+            <tr>
+                <th>#</th>
+                <th>استان - شهر</th>
+                <th>تعداد محصولات</th>
+                <th>وضعیت</th>
+                <th>مبلغ</th>
+                <th>تاریخ</th>
+                <th>عملیات</th>
+            </tr>
             </thead>
             <tbody>
-                @foreach (var item in Model.FilterResult.Data)
-                {
-                    <tr>
-                        <td>@item.Id</td>
-                        <td>@item.Shire</td>
-                        <td>@item.TotalItemCount</td>
-                        <td>@item.Status.ToString()</td>
-                        <td>@item.TotalPrice.ToString("#,0")تومان</td>
-                        <td>@item.CreationDate.ToPersianDate("ds dd ms Y")</td>
-                        <td>
-
-                        </td>
-                    </tr>
-                }
+            @foreach (var item in Model.FilterResult.Data)
+            {
+                <tr>
+                    <td>@item.Id</td>
+                    <td>@item.Shire</td>
+                    <td>@item.TotalItemCount</td>
+                    <td>@item.Status.ToString()</td>
+                    <td>@item.TotalPrice.ToString("#,0")تومان</td>
+                    <td>@item.CreationDate.ToPersianDate("ds dd ms Y")</td>
+                    <td>
+                        <a asp-page="show" asp-route-id="@item.Id" >نمایش</a>
+                    </td>
+                </tr>
+            }
             </tbody>
         </table>
     </div>
 </div>
+<partial name="Admin/Shared/_Pagination" model="Model.FilterResult"/>
 
 @section Scripts
 {

@@ -26,6 +26,8 @@ namespace Eshop.RazorPage.Pages.Admin.Orders;
 
             }
 
+            FilterParam.Take = 2;
+
             FilterResult = await orderService.GetOrdersByFilter(FilterParam);
         }
     }

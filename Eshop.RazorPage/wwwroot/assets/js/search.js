@@ -3,6 +3,15 @@ function filterCategory() {
     $("#searchForm").submit();
 }
 
+function changePageId(pageId) {
+    var url = new URL(window.location.href);
+    var search_params = url.searchParams;
+    search_params.set('pageId', pageId);
+    url.search = search_params.toString();
+    var new_url = url.toString();
+    window.location.replace(new_url);
+}
+
 $("#customSwitch2").change(function () {
     var isChecked = document.getElementById("customSwitch2").checked;
     var url = new URL(window.location.href);

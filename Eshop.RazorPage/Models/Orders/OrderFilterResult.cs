@@ -140,7 +140,7 @@ public class OrderFilterParams : BaseFilterParam
 
 }
 
-public class OrderFilterResult : BaseFilter<OrderFilterData, OrderFilterParams>
+public class OrderFilterResult:BaseFilter<OrderFilterData, OrderFilterParams>
 {
 
 }
