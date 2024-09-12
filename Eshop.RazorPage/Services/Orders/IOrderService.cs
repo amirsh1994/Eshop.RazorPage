@@ -17,6 +17,8 @@ public interface IOrderService
 
     Task<ApiResult> DeleteOrderItem(DeleteOrderItemCommand command);
 
+    Task<ApiResult> SendOrder(long orderId);
+
     Task<OrderFilterResult> GetOrdersByFilter(OrderFilterParams filterParams);
 
     Task<OrderFilterResult> GetUserOrdersByFilter(int take,int pageId,OrderStatus ? orderStatus);
@@ -61,6 +63,14 @@ public class OrderService(HttpClient client) : IOrderService
         var result = await client.DeleteAsync($"order/orderItem/{command.OrderItemId}");
         var response = await result.Content.ReadFromJsonAsync<ApiResult>();
         return response;
+    }
+
+    public async Task<ApiResult> SendOrder(long orderId)
+    {
+        var httpResponseMessage = await client.PutAsync($"order/SendOrder/{orderId}",null);
+        var result=await httpResponseMessage.Content.ReadFromJsonAsync<ApiResult>();
+        return result!;
+
     }
 
 
